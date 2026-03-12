@@ -1,16 +1,73 @@
-# React + Vite
+# Unity Metrix - React Website Replica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A complete React.js + Tailwind CSS replica of [unitymetrix.com](https://unitymetrix.com/), a UK cybersecurity services company.
 
-Currently, two official plugins are available:
+## 📁 Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+src/
+├── components/         # Reusable components
+│   ├── TopBar.jsx      # Top contact bar
+│   ├── Navbar.jsx      # Navigation with dropdowns
+│   ├── Footer.jsx      # Footer with links & contact
+│   ├── Button.jsx      # Reusable button (variants: primary, outline, dark, white)
+│   ├── SectionHeader.jsx  # Section title/subtitle
+│   ├── ServiceCard.jsx    # Service tile card
+│   ├── StatCard.jsx       # Animated stat counter
+│   ├── ProcessStep.jsx    # Step in a process timeline
+│   ├── TestimonialCard.jsx # Customer review card
+│   ├── ContactForm.jsx    # Contact form with validation
+│   └── CookieBanner.jsx   # GDPR cookie consent
+│
+└── pages/              # Full page components
+    ├── Home.jsx         # Homepage (all sections)
+    ├── WhatWeDo.jsx     # Services page (11 services)
+    ├── WhoWeHelp.jsx    # Client profiles (SME, Entrepreneur, Director)
+    ├── Pricing.jsx      # Pricing plans (6 tiers)
+    ├── CaseStudies.jsx  # 4 detailed case studies
+    ├── AboutUs.jsx      # Team, values, certifications
+    ├── KnowledgeCentre.jsx # Filterable blog/articles
+    └── Contact.jsx      # Contact form + info
+```
 
-## React Compiler
+## 🚀 Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React 18** — component-based UI
+- **Tailwind CSS 3** — utility-first styling
+- **Vite** — fast dev server & build tool
+
+## 🎨 Design Tokens
+
+| Token | Value |
+|-------|-------|
+| Primary | `#00d4ff` (cyan) |
+| Dark | `#1a1a2e` (navy) |
+| Font | Inter (Google Fonts) |
+
+## 📄 Pages Included
+
+| Page | Route (internal) | Description |
+|------|-----------------|-------------|
+| Home | `home` | Full landing page |
+| What We Do | `what-we-do` | All 11 services |
+| Who We Help | `who-we-help` | SME, Entrepreneur, Director profiles |
+| Pricing | `pricing` | 6 pricing plans |
+| Case Studies | `case-studies` | 4 client success stories |
+| About Us | `about-us` | Team, values, certifications |
+| Knowledge Centre | `knowledge-centre` | 10 articles with tag filters |
+| Contact | `contact` | Form + contact details |
+
+## 🔧 Customisation
+
+Navigation uses a simple `currentPage` state in `App.jsx`. To add a page:
+1. Create `src/pages/YourPage.jsx`
+2. Import it in `App.jsx`
+3. Add a case to the `renderPage()` switch
+4. Add a nav link in `Navbar.jsx`
