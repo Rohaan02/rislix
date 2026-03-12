@@ -23,9 +23,9 @@ export default function KnowledgeCentre({ navigate }) {
 
   return (
     <div>
-      <section className="bg-[#0d1b2a] text-white py-24">
+      <section className="bg-[#0f172a] text-white py-24">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#f5a623] font-semibold uppercase tracking-widest text-sm mb-3">Resources & Insights</p>
+          <p className="text-[#16a34a] font-semibold uppercase tracking-widest text-sm mb-3">Resources & Insights</p>
           <h1 className="text-5xl font-black mb-6">Knowledge Centre</h1>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg">Stay ahead of cyber threats, regulatory changes, and governance best practices with our expert guides and articles.</p>
         </div>
@@ -35,23 +35,23 @@ export default function KnowledgeCentre({ navigate }) {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-wrap gap-2 justify-center mb-10">
             {tags.map(tag => (
-              <button key={tag} onClick={() => setActiveTag(tag)} className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${activeTag===tag?"bg-[#f5a623] text-white":"bg-white border border-gray-200 text-gray-600 hover:border-[#f5a623] hover:text-[#f5a623]"}`}>{tag}</button>
+              <button key={tag} onClick={() => setActiveTag(tag)} className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${activeTag===tag?"bg-[#16a34a] text-white":"bg-white border border-gray-200 text-gray-600 hover:border-[#16a34a] hover:text-[#16a34a]"}`}>{tag}</button>
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((a,i) => (
               <div key={i} className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group cursor-pointer">
-                <div className="h-44 bg-gradient-to-br from-[#0d1b2a] to-[#1a2f45] flex items-center justify-center">
+                <div className="h-44 bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] flex items-center justify-center">
                   <span className="text-6xl">{a.icon}</span>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs bg-[#fff8ec] text-[#f5a623] font-semibold px-3 py-1 rounded-full border border-[#f5a62330]">{a.tag}</span>
+                    <span className="text-xs bg-[#f0fdf4] text-[#16a34a] font-semibold px-3 py-1 rounded-full border border-[#16a34a30]">{a.tag}</span>
                     <span className="text-xs text-gray-400">{a.date}</span>
                   </div>
-                  <h3 className="font-bold text-[#0d1b2a] mb-2 group-hover:text-[#f5a623] transition-colors leading-snug">{a.title}</h3>
+                  <h3 className="font-bold text-[#0f172a] mb-2 group-hover:text-[#16a34a] transition-colors leading-snug">{a.title}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">{a.desc}</p>
-                  <p className="text-[#f5a623] text-sm font-semibold mt-4">Read more →</p>
+                  <p className="text-[#16a34a] text-sm font-semibold mt-4">Read more →</p>
                 </div>
               </div>
             ))}
@@ -64,8 +64,8 @@ export default function KnowledgeCentre({ navigate }) {
           <SectionHeader title="Stay Informed" subtitle="Newsletter" />
           <p className="text-gray-600 mb-8">Get the latest cybersecurity news, compliance updates, and governance best practices delivered to your inbox.</p>
           <div className="flex max-w-md mx-auto gap-3">
-            <input type="email" placeholder="Your email address" className="flex-1 px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#f5a623] transition-colors text-sm"/>
-            <button className="bg-[#f5a623] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#e09415] transition-colors">Subscribe</button>
+            <input type="email" placeholder="Your email address" className="flex-1 px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#16a34a] transition-colors text-sm"/>
+            <button className="bg-[#16a34a] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#15803d] transition-colors">Subscribe</button>
           </div>
         </div>
       </section>

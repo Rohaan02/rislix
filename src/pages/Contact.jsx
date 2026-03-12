@@ -4,9 +4,9 @@ import SectionHeader from "../components/SectionHeader";
 export default function Contact({ navigate }) {
   return (
     <div>
-      <section className="bg-[#0d1b2a] text-white py-24">
+      <section className="bg-[#0f172a] text-white py-24">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#f5a623] font-semibold uppercase tracking-widest text-sm mb-3">Get in Touch</p>
+          <p className="text-[#16a34a] font-semibold uppercase tracking-widest text-sm mb-3">Get in Touch</p>
           <h1 className="text-5xl font-black mb-6">Contact Us</h1>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg">Still Confused About Our Services? For a free initial 30-minute consultancy, please get in touch.</p>
         </div>
@@ -30,31 +30,31 @@ export default function Contact({ navigate }) {
                 {icon:"📍",label:"Registered Address",value:"167-169 Great Portland Street, 5th Floor, London, W1W 5PF",href:null},
               ].map((c,i) => (
                 <div key={i} className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex items-start gap-4">
-                  <div className="w-12 h-12 bg-[#fff8ec] rounded-xl flex items-center justify-center text-xl shrink-0 border border-[#f5a62330]">{c.icon}</div>
+                  <div className="w-12 h-12 bg-[#f0fdf4] rounded-xl flex items-center justify-center text-xl shrink-0 border border-[#16a34a30]">{c.icon}</div>
                   <div>
                     <p className="text-sm font-semibold text-gray-400 mb-1">{c.label}</p>
-                    {c.href ? <a href={c.href} className="font-bold text-[#0d1b2a] hover:text-[#f5a623] transition-colors">{c.value}</a> : <p className="font-semibold text-[#0d1b2a] text-sm">{c.value}</p>}
+                    {c.href ? <a href={c.href} className="font-bold text-[#0f172a] hover:text-[#16a34a] transition-colors">{c.value}</a> : <p className="font-semibold text-[#0f172a] text-sm">{c.value}</p>}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-gradient-to-br from-[#0d1b2a] to-[#1a2f45] rounded-2xl p-8 mt-6 text-white">
-              <h3 className="font-bold text-lg mb-4 text-[#f5a623]">Business Hours</h3>
+            <div className="bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] rounded-2xl p-8 mt-6 text-white">
+              <h3 className="font-bold text-lg mb-4 text-[#16a34a]">Business Hours</h3>
               <div className="space-y-2 text-sm text-gray-300">
-                <div className="flex justify-between"><span>Monday – Friday</span><span className="text-[#f5a623] font-semibold">9:00 AM – 6:00 PM GMT</span></div>
+                <div className="flex justify-between"><span>Monday – Friday</span><span className="text-[#16a34a] font-semibold">9:00 AM – 6:00 PM GMT</span></div>
                 <div className="flex justify-between"><span>Saturday</span><span>By appointment</span></div>
                 <div className="flex justify-between"><span>Sunday</span><span>Closed</span></div>
               </div>
               <div className="mt-4 pt-4 border-t border-[#ffffff15]">
-                <div className="flex items-center gap-2 text-sm text-[#f5a623]">
-                  <span className="w-2 h-2 bg-[#f5a623] rounded-full animate-pulse"></span>
+                <div className="flex items-center gap-2 text-sm text-[#16a34a]">
+                  <span className="w-2 h-2 bg-[#16a34a] rounded-full animate-pulse"></span>
                   Managed Advisory clients receive 24/7 support
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#f5a623] rounded-2xl p-6 mt-5 text-white">
+            <div className="bg-[#16a34a] rounded-2xl p-6 mt-5 text-white">
               <h3 className="font-black text-lg mb-1">Free 30-Minute Consultation</h3>
               <p className="text-white/80 text-sm mb-3">Not sure where to start? Book a free no-obligation consultancy and we'll help you identify the right services for your needs.</p>
               <a href="mailto:info@rislix.com" className="font-black text-white text-lg hover:underline">info@rislix.com</a>
@@ -63,11 +63,11 @@ export default function Contact({ navigate }) {
         </div>
       </section>
 
-      <section className="py-16 bg-[#0d1b2a] text-white">
+      <section className="py-16 bg-[#0f172a] text-white">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-black mb-4">Need Urgent Assistance?</h2>
           <p className="text-gray-400 mb-6">If you've experienced a cyber incident or need urgent compliance guidance, contact us directly.</p>
-          <a href="mailto:info@rislix.com" className="inline-flex items-center gap-2 bg-[#f5a623] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#e09415] transition-colors">
+          <a href="mailto:info@rislix.com" className="inline-flex items-center gap-2 bg-[#16a34a] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#15803d] transition-colors">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
             info@rislix.com
           </a>

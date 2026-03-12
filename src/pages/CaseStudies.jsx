@@ -11,9 +11,9 @@ const cases = [
 export default function CaseStudies({ navigate }) {
   return (
     <div>
-      <section className="bg-[#0d1b2a] text-white py-24">
+      <section className="bg-[#0f172a] text-white py-24">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#f5a623] font-semibold uppercase tracking-widest text-sm mb-3">Success Stories</p>
+          <p className="text-[#16a34a] font-semibold uppercase tracking-widest text-sm mb-3">Success Stories</p>
           <h1 className="text-5xl font-black mb-6">Case Studies</h1>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg">Real organizations, real results. See how RISLIX has helped clients achieve compliance and build cyber resilience.</p>
         </div>
@@ -24,9 +24,9 @@ export default function CaseStudies({ navigate }) {
           {cases.map((c,i) => (
             <div key={i} className="bg-white rounded-2xl shadow-md overflow-hidden">
               <div className="grid lg:grid-cols-4">
-                <div className="bg-gradient-to-br from-[#0d1b2a] to-[#1a2f45] p-8 flex flex-col justify-center items-center text-white text-center">
+                <div className="bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] p-8 flex flex-col justify-center items-center text-white text-center">
                   <span className="text-5xl mb-3">{c.icon}</span>
-                  <span className="text-[#f5a623] text-xs font-bold uppercase tracking-widest mb-1">{c.industry}</span>
+                  <span className="text-[#16a34a] text-xs font-bold uppercase tracking-widest mb-1">{c.industry}</span>
                   <h3 className="text-lg font-black">{c.company}</h3>
                 </div>
                 <div className="lg:col-span-3 p-8">
@@ -35,16 +35,16 @@ export default function CaseStudies({ navigate }) {
                       <div key={label}>
                         <div className="flex items-center gap-2 mb-2">
                           <span>{dot}</span>
-                          <span className="font-bold text-[#0d1b2a] text-sm uppercase tracking-wide">{label}</span>
+                          <span className="font-bold text-[#0f172a] text-sm uppercase tracking-wide">{label}</span>
                         </div>
                         <p className="text-gray-600 text-sm leading-relaxed">{text}</p>
                       </div>
                     ))}
                   </div>
                   <div className="border-t border-gray-100 pt-4 flex items-center gap-3">
-                    <div className="w-9 h-9 bg-[#f5a623] rounded-full flex items-center justify-center text-white font-bold text-sm">{c.name[0]}</div>
+                    <div className="w-9 h-9 bg-[#16a34a] rounded-full flex items-center justify-center text-white font-bold text-sm">{c.name[0]}</div>
                     <div>
-                      <p className="font-semibold text-[#0d1b2a] text-sm">{c.name}</p>
+                      <p className="font-semibold text-[#0f172a] text-sm">{c.name}</p>
                       <p className="text-gray-500 text-xs">{c.role}, {c.company}</p>
                     </div>
                   </div>
@@ -55,11 +55,11 @@ export default function CaseStudies({ navigate }) {
         </div>
       </section>
 
-      <section className="py-16 bg-[#f5a623] text-white">
+      <section className="py-16 bg-[#1e3a8a] text-white">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-black mb-4">Ready to Become Our Next Success Story?</h2>
           <p className="text-white/80 mb-8">Join organizations across the GCC, UK, and beyond who've built cyber confidence with RISLIX.</p>
-          <Button onClick={() => navigate("contact")} className="bg-[#0d1b2a] text-white hover:bg-black rounded-full px-8 py-3 font-bold transition-colors">Get a Free Assessment</Button>
+          <Button onClick={() => navigate("contact")} className="bg-[#0f172a] text-white hover:bg-black rounded-full px-8 py-3 font-bold transition-colors">Get a Free Assessment</Button>
         </div>
       </section>
     </div>

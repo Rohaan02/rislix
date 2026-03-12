@@ -71,9 +71,9 @@ const services = [
 export default function WhatWeDo({ navigate }) {
   return (
     <div>
-      <section className="bg-[#0d1b2a] text-white py-24">
+      <section className="bg-[#0f172a] text-white py-24">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#f5a623] font-semibold uppercase tracking-widest text-sm mb-3">Our Services</p>
+          <p className="text-[#16a34a] font-semibold uppercase tracking-widest text-sm mb-3">Our Services</p>
           <h1 className="text-5xl font-black mb-6">What We Do</h1>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg">Comprehensive cybersecurity, privacy, GRC, and AI governance services for regulated organisations worldwide.</p>
         </div>
@@ -83,7 +83,7 @@ export default function WhatWeDo({ navigate }) {
         <div className="max-w-7xl mx-auto px-4 space-y-10">
           {services.map((s,i) => (
             <div key={i} className={`bg-white rounded-2xl shadow-md overflow-hidden flex flex-col lg:flex-row ${i%2===1?"lg:flex-row-reverse":""}`}>
-              <div className="lg:w-1/3 bg-gradient-to-br from-[#0d1b2a] to-[#1a2f45] p-10 flex flex-col justify-center items-center text-white text-center">
+              <div className="lg:w-1/3 bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] p-10 flex flex-col justify-center items-center text-white text-center">
                 <span className="text-6xl mb-4">{s.icon}</span>
                 <h2 className="text-xl font-black leading-snug">{s.title}</h2>
               </div>
@@ -92,11 +92,11 @@ export default function WhatWeDo({ navigate }) {
 
                 {s.delivers && (
                   <div className="mb-6">
-                    <p className="font-bold text-[#0d1b2a] mb-3 text-sm uppercase tracking-wide">What We Deliver</p>
+                    <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">What We Deliver</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {s.delivers.map(d => (
                         <div key={d} className="flex items-start gap-2 text-sm text-gray-600">
-                          <svg className="w-4 h-4 text-[#f5a623] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+                          <svg className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
                           {d}
                         </div>
                       ))}
@@ -105,19 +105,19 @@ export default function WhatWeDo({ navigate }) {
                 )}
 
                 {s.standards && (
-                  <div className="bg-[#fff8ec] border border-[#f5a62330] rounded-xl px-5 py-3 mb-4">
-                    <p className="text-xs font-bold text-[#f5a623] uppercase tracking-wide mb-1">Standards & Frameworks Covered</p>
+                  <div className="bg-[#f0fdf4] border border-[#16a34a30] rounded-xl px-5 py-3 mb-4">
+                    <p className="text-xs font-bold text-[#16a34a] uppercase tracking-wide mb-1">Standards & Frameworks Covered</p>
                     <p className="text-sm text-gray-600">{s.standards}</p>
                   </div>
                 )}
 
                 {s.regions && (
                   <div className="mb-6">
-                    <p className="font-bold text-[#0d1b2a] mb-3 text-sm uppercase tracking-wide">Regulations Covered (Region-Wise)</p>
+                    <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">Regulations Covered (Region-Wise)</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {s.regions.map(r => (
                         <div key={r.label} className="bg-gray-50 rounded-xl p-4">
-                          <p className="font-bold text-[#f5a623] text-xs mb-2">{r.label}</p>
+                          <p className="font-bold text-[#16a34a] text-xs mb-2">{r.label}</p>
                           {r.items.map(item => <p key={item} className="text-xs text-gray-600 mb-1">• {item}</p>)}
                         </div>
                       ))}
@@ -127,7 +127,7 @@ export default function WhatWeDo({ navigate }) {
 
                 {s.sub && s.sub.map((sub,j) => (
                   <div key={j} className="mb-6">
-                    <p className="font-bold text-[#0d1b2a] mb-2">{sub.title}</p>
+                    <p className="font-bold text-[#0f172a] mb-2">{sub.title}</p>
                     {sub.intro && <p className="text-sm text-gray-500 mb-2">{sub.intro}</p>}
                     {sub.items && (
                       <div className="grid grid-cols-2 gap-1 mb-2">
@@ -138,7 +138,7 @@ export default function WhatWeDo({ navigate }) {
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
                         {sub.regions.map(r => (
                           <div key={r.label} className="bg-gray-50 rounded-xl p-3">
-                            <p className="font-bold text-[#f5a623] text-xs mb-1">{r.label}</p>
+                            <p className="font-bold text-[#16a34a] text-xs mb-1">{r.label}</p>
                             {r.items.map(it => <p key={it} className="text-xs text-gray-500">• {it}</p>)}
                           </div>
                         ))}
@@ -149,11 +149,11 @@ export default function WhatWeDo({ navigate }) {
 
                 {s.portfolio && (
                   <div className="mb-4">
-                    <p className="font-bold text-[#0d1b2a] mb-3 text-sm uppercase tracking-wide">Assessment Portfolio</p>
+                    <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">Assessment Portfolio</p>
                     <div className="grid grid-cols-2 gap-2">
                       {s.portfolio.map(d => (
                         <div key={d} className="flex items-start gap-2 text-sm text-gray-600">
-                          <svg className="w-4 h-4 text-[#f5a623] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+                          <svg className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
                           {d}
                         </div>
                       ))}
@@ -161,14 +161,14 @@ export default function WhatWeDo({ navigate }) {
                   </div>
                 )}
                 {s.deliverables && (
-                  <div className="bg-[#fff8ec] border border-[#f5a62330] rounded-xl p-4">
-                    <p className="font-bold text-[#f5a623] text-xs mb-2 uppercase tracking-wide">Deliverables</p>
+                  <div className="bg-[#f0fdf4] border border-[#16a34a30] rounded-xl p-4">
+                    <p className="font-bold text-[#16a34a] text-xs mb-2 uppercase tracking-wide">Deliverables</p>
                     {s.deliverables.map(d => <p key={d} className="text-xs text-gray-600 mb-1">• {d}</p>)}
                   </div>
                 )}
 
                 <div className="mt-6">
-                  <Button onClick={() => navigate("contact")} className="bg-[#f5a623] hover:bg-[#e09415] text-white rounded-full px-6 py-2.5 font-bold transition-colors">Get a Free Assessment</Button>
+                  <Button onClick={() => navigate("contact")} className="bg-[#16a34a] hover:bg-[#15803d] text-white rounded-full px-6 py-2.5 font-bold transition-colors">Get a Free Assessment</Button>
                 </div>
               </div>
             </div>
@@ -176,7 +176,7 @@ export default function WhatWeDo({ navigate }) {
         </div>
       </section>
 
-      <section className="py-20 bg-[#0d1b2a] text-white">
+      <section className="py-20 bg-[#0f172a] text-white">
         <div className="max-w-4xl mx-auto px-4">
           <SectionHeader title="Get in Touch" subtitle="Contact Us" light />
           <div className="bg-[#ffffff08] border border-[#ffffff15] rounded-2xl p-10">
