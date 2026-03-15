@@ -6,6 +6,7 @@ import StatCard from "../components/StatCard";
 import ProcessStep from "../components/ProcessStep";
 import TestimonialCard from "../components/TestimonialCard";
 import ContactForm from "../components/ContactForm";
+import HeroBg from "../components/HeroBg";
 
 const services = [
   {
@@ -128,6 +129,8 @@ export default function Home({ navigate }) {
     <div>
       {/* ── Hero ── */}
       <section className="relative bg-[#0f172a] text-white overflow-hidden min-h-[88vh] flex items-center">
+        {/* ── Animated Canvas Background ── */}
+        <HeroBg />
         {/* background effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#1e3a8a08] rounded-full blur-3xl -translate-y-1/3 translate-x-1/4"></div>
@@ -141,7 +144,6 @@ export default function Home({ navigate }) {
             }}
           ></div>
         </div>
-
         <div className="relative max-w-7xl mx-auto px-6 py-28 grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-[#16a34a18] text-[#16a34a] px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-[#16a34a30]">
