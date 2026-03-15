@@ -218,7 +218,7 @@ export default function Home({ navigate }) {
                     RISLIX
                   </div>
                   <div className="text-gray-400 text-xs tracking-wider mt-1">
-                    Information · Security · Consultancy
+                    Information Security Consultancy
                   </div>
                 </div>
               </div>
