@@ -1,4 +1,5 @@
 // Updated to use image from assets instead of SVG
+
 export default function RislixLogo({
   size = 48,
   showText = true,
@@ -8,7 +9,7 @@ export default function RislixLogo({
     <div className="flex items-center gap-3">
       {/* Image from assets */}
       <img
-        src="/src/assets/RislixCyberSecurityLogo.jpeg"
+        src="/assets/RislixCyberSecurityLogo.jpeg"
         alt="Rislix Cyber Security Logo"
         width={size}
         height={size * 1.1}
