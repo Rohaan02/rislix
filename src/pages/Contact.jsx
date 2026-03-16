@@ -53,13 +53,13 @@ export default function Contact({ navigate }) {
                   value: "+44 7404 224899",
                   href: "tel:+447404224899",
                 },
-                {
-                  icon: "📍",
-                  label: "Registered Address",
-                  value:
-                    "167-169 Great Portland Street, 5th Floor, London, W1W 5PF",
-                  href: null,
-                },
+                // {
+                //   icon: "📍",
+                //   label: "Registered Address",
+                //   value:
+                //     "167-169 Great Portland Street, 5th Floor, London, W1W 5PF",
+                //   href: null,
+                // },
               ].map((c, i) => (
                 <div
                   key={i}

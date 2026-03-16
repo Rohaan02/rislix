@@ -97,17 +97,20 @@ export default function HeroBg() {
       const MAX_DIST = 220;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
+          const a = nodes[i],
+            b = nodes[j];
+          const dx = a.x - b.x,
+            dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MAX_DIST) {
             const alpha = (1 - dist / MAX_DIST) * 0.18;
             ctx.beginPath();
             ctx.moveTo(a.x * sx, a.y * sy);
             ctx.lineTo(b.x * sx, b.y * sy);
-            ctx.strokeStyle = a.color === "#16a34a"
-              ? `rgba(22,163,74,${alpha})`
-              : `rgba(30,58,138,${alpha * 1.5})`;
+            ctx.strokeStyle =
+              a.color === "#16a34a"
+                ? `rgba(22,163,74,${alpha})`
+                : `rgba(30,58,138,${alpha * 1.5})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -123,12 +126,19 @@ export default function HeroBg() {
         // outer glow
         if (n.bright) {
           const grad = ctx.createRadialGradient(
-            n.x * sx, n.y * sy, 0,
-            n.x * sx, n.y * sy, r * 6
+            n.x * sx,
+            n.y * sy,
+            0,
+            n.x * sx,
+            n.y * sy,
+            r * 6
           );
-          grad.addColorStop(0, n.color === "#16a34a"
-            ? `rgba(74,222,128,${alpha * 0.4})`
-            : `rgba(96,165,250,${alpha * 0.4})`);
+          grad.addColorStop(
+            0,
+            n.color === "#16a34a"
+              ? `rgba(74,222,128,${alpha * 0.4})`
+              : `rgba(96,165,250,${alpha * 0.4})`
+          );
           grad.addColorStop(1, "transparent");
           ctx.beginPath();
           ctx.arc(n.x * sx, n.y * sy, r * 6, 0, Math.PI * 2);
@@ -139,9 +149,10 @@ export default function HeroBg() {
         // core
         ctx.beginPath();
         ctx.arc(n.x * sx, n.y * sy, r * sx, 0, Math.PI * 2);
-        ctx.fillStyle = n.color === "#16a34a"
-          ? `rgba(74,222,128,${alpha})`
-          : `rgba(96,165,250,${alpha})`;
+        ctx.fillStyle =
+          n.color === "#16a34a"
+            ? `rgba(74,222,128,${alpha})`
+            : `rgba(96,165,250,${alpha})`;
         ctx.fill();
       });
 
@@ -153,7 +164,8 @@ export default function HeroBg() {
           p.nodeA = Math.floor(Math.random() * NODE_COUNT);
           p.nodeB = Math.floor(Math.random() * NODE_COUNT);
         }
-        const a = nodes[p.nodeA], b = nodes[p.nodeB];
+        const a = nodes[p.nodeA],
+          b = nodes[p.nodeB];
         const px = (a.x + (b.x - a.x) * p.progress) * sx;
         const py = (a.y + (b.y - a.y) * p.progress) * sy;
 
@@ -164,9 +176,12 @@ export default function HeroBg() {
         const ty = (a.y + (b.y - a.y) * tp) * sy;
         const grad = ctx.createLinearGradient(tx, ty, px, py);
         grad.addColorStop(0, "transparent");
-        grad.addColorStop(1, p.color === "#4ade80"
-          ? "rgba(74,222,128,0.7)"
-          : "rgba(96,165,250,0.7)");
+        grad.addColorStop(
+          1,
+          p.color === "#4ade80"
+            ? "rgba(74,222,128,0.7)"
+            : "rgba(96,165,250,0.7)"
+        );
         ctx.beginPath();
         ctx.moveTo(tx, ty);
         ctx.lineTo(px, py);
@@ -177,9 +192,10 @@ export default function HeroBg() {
         // dot
         ctx.beginPath();
         ctx.arc(px, py, p.size * 0.7, 0, Math.PI * 2);
-        ctx.fillStyle = p.color === "#4ade80"
-          ? "rgba(74,222,128,0.9)"
-          : "rgba(96,165,250,0.9)";
+        ctx.fillStyle =
+          p.color === "#4ade80"
+            ? "rgba(74,222,128,0.9)"
+            : "rgba(96,165,250,0.9)";
         ctx.fill();
       });
 
@@ -203,21 +219,21 @@ export default function HeroBg() {
       // ── 7. Corner HUD brackets ──
       const bSize = Math.min(w, h) * 0.06;
       const bAlpha = 0.18;
-      const corners = [
-        [bSize, bSize, 1, 1],
-        [w - bSize, bSize, -1, 1],
-        [bSize, h - bSize, 1, -1],
-        [w - bSize, h - bSize, -1, -1],
-      ];
-      corners.forEach(([cx, cy, dx, dy]) => {
-        ctx.beginPath();
-        ctx.moveTo(cx + dx * bSize, cy);
-        ctx.lineTo(cx, cy);
-        ctx.lineTo(cx, cy + dy * bSize);
-        ctx.strokeStyle = `rgba(74,222,128,${bAlpha})`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      });
+      // const corners = [
+      //   [bSize, bSize, 1, 1],
+      //   [w - bSize, bSize, -1, 1],
+      //   [bSize, h - bSize, 1, -1],
+      //   [w - bSize, h - bSize, -1, -1],
+      // ];
+      // corners.forEach(([cx, cy, dx, dy]) => {
+      //   ctx.beginPath();
+      //   ctx.moveTo(cx + dx * bSize, cy);
+      //   ctx.lineTo(cx, cy);
+      //   ctx.lineTo(cx, cy + dy * bSize);
+      //   ctx.strokeStyle = `rgba(74,222,128,${bAlpha})`;
+      //   ctx.lineWidth = 1.5;
+      //   ctx.stroke();
+      // });
 
       animId = requestAnimationFrame(draw);
     };

@@ -1,6 +1,11 @@
 import RislixLogo from "./RislixLogo";
 
-export default function Footer({ navigate }) {
+export default function Footer({
+  navigate,
+  size = 48,
+  showText = true,
+  textSize = "lg",
+}) {
   return (
     <footer className="bg-[#0f172a] text-white">
       <div className="max-w-7xl mx-auto px-4 py-16">
@@ -8,7 +13,24 @@ export default function Footer({ navigate }) {
           {/* Logo & About */}
           <div>
             <button onClick={() => navigate("home")} className="mb-4 block">
-              <RislixLogo size={42} showText={true} textSize="md" />
+              {/* <RislixLogo
+                size={42}
+                showText={true}
+                textSize="md"
+                className="text-white"
+              /> */}
+              <div
+                className={`font-black tracking-widest uppercase ${
+                  textSize === "lg"
+                    ? "text-2xl"
+                    : textSize === "sm"
+                    ? "text-base"
+                    : "text-xl"
+                }`}
+              >
+                <span className="text-[#1e3a8a]">RISL</span>
+                <span className="text-[#16a34a]">IX</span>
+              </div>
             </button>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
               Enterprise-grade cybersecurity, compliance, and governance
@@ -16,7 +38,7 @@ export default function Footer({ navigate }) {
             </p>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/rislix/"
                 className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#16a34a] transition-colors"
               >
                 <svg
@@ -124,7 +146,7 @@ export default function Footer({ navigate }) {
                   +44 7404 224899
                 </a>
               </div>
-              <div className="flex items-start gap-2">
+              {/* <div className="flex items-start gap-2">
                 <svg
                   className="w-4 h-4 mt-0.5 text-[#16a34a] shrink-0"
                   fill="currentColor"
@@ -139,7 +161,7 @@ export default function Footer({ navigate }) {
                 <span>
                   167-169 Great Portland Street, 5th Floor, London, W1W 5PF
                 </span>
-              </div>
+              </div> */}
             </div>
             <div className="mt-6 bg-[#16a34a]/10 border border-[#16a34a]/30 rounded-xl p-4">
               <p className="text-xs text-[#4ade80] font-bold mb-2 uppercase tracking-wide">

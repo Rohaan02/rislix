@@ -16,21 +16,42 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
 
   const navigate = (page) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const [basePage, hash] = page.split("#");
+    setCurrentPage(basePage);
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const renderPage = () => {
-    switch (currentPage) {
-      case "home":            return <Home navigate={navigate} />;
-      case "what-we-do":     return <WhatWeDo navigate={navigate} />;
-      case "who-we-help":    return <WhoWeHelp navigate={navigate} />;
-      case "pricing":        return <Pricing navigate={navigate} />;
-      case "case-studies":   return <CaseStudies navigate={navigate} />;
-      case "about-us":       return <AboutUs navigate={navigate} />;
-      case "knowledge-centre": return <KnowledgeCentre navigate={navigate} />;
-      case "contact":        return <Contact navigate={navigate} />;
-      default:               return <Home navigate={navigate} />;
+    const basePage = currentPage.split("#")[0];
+
+    switch (basePage) {
+      case "home":
+        return <Home navigate={navigate} />;
+      case "what-we-do":
+        return <WhatWeDo navigate={navigate} />;
+      case "who-we-help":
+        return <WhoWeHelp navigate={navigate} />;
+      case "pricing":
+        return <Pricing navigate={navigate} />;
+      case "case-studies":
+        return <CaseStudies navigate={navigate} />;
+      case "about-us":
+        return <AboutUs navigate={navigate} />;
+      case "knowledge-centre":
+        return <KnowledgeCentre navigate={navigate} />;
+      case "contact":
+        return <Contact navigate={navigate} />;
+      default:
+        return <Home navigate={navigate} />;
     }
   };
 

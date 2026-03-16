@@ -1,24 +1,36 @@
-import { useState } from "react";
+import { useState, useRef } from "react"; // Add useRef
 import RislixLogo from "./RislixLogo";
 
 const services = [
-  { label: "vCISO – Virtual CISO", page: "what-we-do" },
-  { label: "vDPO – Virtual DPO", page: "what-we-do" },
-  { label: "Governance, Risk & Compliance (GRC)", page: "what-we-do" },
-  { label: "Cybersecurity Assessments & VAPT", page: "what-we-do" },
-  { label: "Enterprise Security Architecture", page: "what-we-do" },
-  { label: "Business Continuity & ISO 22301", page: "what-we-do" },
-  { label: "AI Governance & Responsible AI", page: "what-we-do" },
-  { label: "Managed Cybersecurity Advisory", page: "what-we-do" },
+  { label: "vCISO – Virtual CISO", page: "what-we-do#vciso" },
+  { label: "vDPO – Virtual DPO", page: "what-we-do#vdpo" },
+  { label: "Governance, Risk & Compliance (GRC)", page: "what-we-do#grc" },
+  { label: "Cybersecurity Assessments & VAPT", page: "what-we-do#vapt" },
+  {
+    label: "Enterprise Security Architecture",
+    page: "what-we-do#architecture",
+  },
+  {
+    label: "Business Continuity & ISO 22301",
+    page: "what-we-do#business-continuity",
+  },
+  { label: "AI Governance & Responsible AI", page: "what-we-do#ai-governance" },
+  {
+    label: "Managed Cybersecurity Advisory",
+    page: "what-we-do#managed-advisory",
+  },
 ];
 
 const whoWeHelp = [
-  { label: "Government", page: "who-we-help" },
-  { label: "Banking & Finance", page: "who-we-help" },
-  { label: "Education", page: "who-we-help" },
-  { label: "Telecom", page: "who-we-help" },
-  { label: "Information Technology", page: "who-we-help" },
-  { label: "Software & IT", page: "who-we-help" },
+  { label: "Government", page: "who-we-help#government" },
+  { label: "Banking & Finance", page: "who-we-help#banking" },
+  { label: "Education", page: "who-we-help#education" },
+  { label: "Telecom", page: "who-we-help#telecom" },
+  {
+    label: "Information Technology",
+    page: "who-we-help#information-technology",
+  },
+  { label: "Software & IT", page: "who-we-help#software-it" },
 ];
 
 const ChevronDown = () => (
@@ -44,6 +56,10 @@ export default function Navbar({ currentPage, navigate }) {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileWhoOpen, setMobileWhoOpen] = useState(false);
 
+  // Use refs for timers
+  const servicesTimer = useRef(null);
+  const whoTimer = useRef(null);
+
   const isActive = (page) => currentPage === page;
 
   const navLinkClass = (page) =>
@@ -57,12 +73,42 @@ export default function Navbar({ currentPage, navigate }) {
   const dropdownClass =
     "absolute top-[calc(100%+8px)] left-0 bg-[#0f1f3d] border border-white/10 shadow-2xl shadow-black/40 rounded-xl py-2 z-50 backdrop-blur-md";
 
+  // Handlers for Services dropdown
+  const handleServicesMouseEnter = () => {
+    if (servicesTimer.current) {
+      clearTimeout(servicesTimer.current);
+      servicesTimer.current = null;
+    }
+    setServicesOpen(true);
+  };
+
+  const handleServicesMouseLeave = () => {
+    servicesTimer.current = setTimeout(() => {
+      setServicesOpen(false);
+    }, 150); // 150ms delay - enough time to move mouse to dropdown
+  };
+
+  // Handlers for Who We Help dropdown
+  const handleWhoMouseEnter = () => {
+    if (whoTimer.current) {
+      clearTimeout(whoTimer.current);
+      whoTimer.current = null;
+    }
+    setWhoOpen(true);
+  };
+
+  const handleWhoMouseLeave = () => {
+    whoTimer.current = setTimeout(() => {
+      setWhoOpen(false);
+    }, 150); // 150ms delay
+  };
+
   return (
     <nav
       className="sticky top-0 z-50 shadow-xl"
       style={{
         background:
-          "linear-gradient(110deg, #fff 0%, #166534 60%, #16a34a 100%)",
+          "linear-gradient(110deg, #fff 0%, #166534 70%, #16a34a 100%)",
         borderBottom: "1px solid rgba(255,255,255,0.12)",
       }}
     >
@@ -98,14 +144,18 @@ export default function Navbar({ currentPage, navigate }) {
           {/* ── What We Do dropdown ── */}
           <div
             className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
+            onMouseEnter={handleServicesMouseEnter}
+            onMouseLeave={handleServicesMouseLeave}
           >
             <button className={navLinkClass("what-we-do")}>
               What We Do <ChevronDown />
             </button>
             {servicesOpen && (
-              <div className={`${dropdownClass} w-80`}>
+              <div
+                className={`${dropdownClass} w-80`}
+                onMouseEnter={handleServicesMouseEnter}
+                onMouseLeave={handleServicesMouseLeave}
+              >
                 {/* dropdown header accent */}
                 <div className="px-4 pb-2 mb-1 border-b border-white/10">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-green-400">
@@ -132,14 +182,18 @@ export default function Navbar({ currentPage, navigate }) {
           {/* ── Who We Help dropdown ── */}
           <div
             className="relative"
-            onMouseEnter={() => setWhoOpen(true)}
-            onMouseLeave={() => setWhoOpen(false)}
+            onMouseEnter={handleWhoMouseEnter}
+            onMouseLeave={handleWhoMouseLeave}
           >
             <button className={navLinkClass("who-we-help")}>
               Who We Help <ChevronDown />
             </button>
             {whoOpen && (
-              <div className={`${dropdownClass} w-56`}>
+              <div
+                className={`${dropdownClass} w-56`}
+                onMouseEnter={handleWhoMouseEnter}
+                onMouseLeave={handleWhoMouseLeave}
+              >
                 <div className="px-4 pb-2 mb-1 border-b border-white/10">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400">
                     Industries

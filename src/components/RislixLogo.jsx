@@ -37,7 +37,7 @@ export default function RislixLogo({
             <span className="text-[#16a34a]">IX</span>
           </div>
           <span className="text-black font-medium text-[9px] tracking-[0.2em] uppercase mt-0.5">
-            Information Security Consultancy
+            {/* Information Security Consultancy */}
           </span>
         </div>
       )}

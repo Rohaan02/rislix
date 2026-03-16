@@ -60,12 +60,16 @@ const services = [
 ];
 
 const industries = [
-  { icon: "🏛️", name: "Government" },
-  { icon: "🏦", name: "Banking & Finance" },
-  { icon: "🎓", name: "Education" },
-  { icon: "📡", name: "Telecom" },
-  { icon: "💻", name: "Information Technology" },
-  { icon: "⚙️", name: "Software & IT" },
+  { icon: "🏛️", name: "Government", page: "who-we-help#government" },
+  { icon: "🏦", name: "Banking & Finance", page: "who-we-help#banking" },
+  { icon: "🎓", name: "Education", page: "who-we-help#education" },
+  { icon: "📡", name: "Telecom", page: "who-we-help#telecom" },
+  {
+    icon: "💻",
+    name: "Information Technology",
+    page: "who-we-help#information-technology",
+  },
+  { icon: "⚙️", name: "Software & IT", page: "who-we-help#software-it" },
 ];
 
 const faqs = [
@@ -146,10 +150,10 @@ export default function Home({ navigate }) {
         </div>
         <div className="relative max-w-7xl mx-auto px-6 py-28 grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 bg-[#16a34a18] text-[#16a34a] px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-[#16a34a30]">
+            {/* <div className="inline-flex items-center gap-2 bg-[#16a34a18] text-[#16a34a] px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-[#16a34a30]">
               <span className="w-2 h-2 bg-[#16a34a] rounded-full animate-pulse"></span>
               Cybersecurity · Privacy · GRC · AI Governance
-            </div>
+            </div> */}
             <h1 className="text-4xl lg:text-[3.2rem] font-black leading-tight mb-6 tracking-tight">
               Compliance That Inspires
               <br />
@@ -158,9 +162,9 @@ export default function Home({ navigate }) {
               Enables <span className="text-[#16a34a]">Growth.</span>
             </h1>
             <p className="text-gray-300 text-lg mb-10 leading-relaxed max-w-xl">
-              Our comprehensive cybersecurity, governance, and digital risk
-              services help organizations build trust, reduce uncertainty, and
-              stay audit-ready year-round.
+              Our comprehensive Information Security Consultancy services help
+              organizations build trust, reduce uncertainty, and stay
+              audit-ready year-round.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button
@@ -180,7 +184,7 @@ export default function Home({ navigate }) {
                 Explore Services
               </Button>
             </div>
-            <div className="flex flex-wrap gap-3 mt-10">
+            {/* <div className="flex flex-wrap gap-3 mt-10">
               {[
                 "ISO 27001",
                 "NIST CSF",
@@ -198,7 +202,7 @@ export default function Home({ navigate }) {
                   {b}
                 </span>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Hero visual */}
@@ -224,26 +228,26 @@ export default function Home({ navigate }) {
               </div>
               {/* Floating badges */}
               {[
-                { label: "ISO 27001", pos: "top-6 right-2", icon: "🏆" },
-                { label: "GDPR Ready", pos: "top-24 -right-4", icon: "🇪🇺" },
-                { label: "NCA ECC", pos: "bottom-20 -right-2", icon: "🇸🇦" },
-                { label: "NIST CSF", pos: "bottom-6 right-8", icon: "🇺🇸" },
                 {
-                  label: "Information Security Consultancy",
+                  label: "Data Protection",
+                  pos: "bottom-20 -right-2",
+                  icon: "🛡️",
+                },
+                {
+                  label: "Information Security",
                   pos: "top-10 -left-4",
                   icon: "🔒",
                 },
-                { label: "Data Privacy", pos: "bottom-32 left-0", icon: "🛡️" },
+                { label: "Data Privacy", pos: "bottom-32 left-0", icon: "🔐" },
                 {
-                  label: "AI Consultancy",
-                  pos: "bottom-14 left-0",
-                  icon: "🤖",
+                  label: "AI Security",
+                  pos: "top-24 -right-4",
+                  icon: "🤖🔒",
                 },
-                // {label:"24/7 Advisory",pos:"top-10 -left-4",icon:"📡"},
                 {
                   label: "AI Governance",
                   pos: "bottom-5 left-20",
-                  icon: "🤖",
+                  icon: "⚖️",
                 },
               ].map((b) => (
                 <div
@@ -259,167 +263,6 @@ export default function Home({ navigate }) {
         </div>
       </section>
 
-      <h1>Original</h1>
-      {/* ── Industries Banner ── */}
-      <section className="bg-[#1e3a8a] py-5">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-white font-bold text-sm uppercase tracking-widest mb-3">
-            Delivering Cyber Confidence Across Multiple Industries
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            {industries.map((ind) => (
-              <div
-                key={ind.name}
-                className="flex items-center gap-2 text-[#0f172a] font-semibold text-sm"
-              >
-                <span className="text-xl">{ind.icon}</span>
-                {ind.name}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <h1>Option 1</h1>
-      {/* ── Industries Banner ── */}
-      <section className="bg-gradient-to-r from-[#1e3a8a] to-[#2563eb] py-10">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-white font-bold text-sm uppercase tracking-widest mb-6">
-            Delivering Cyber Confidence Across Multiple Industries
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {industries.map((ind) => (
-              <div
-                key={ind.name}
-                className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
-              >
-                <span className="text-2xl">{ind.icon}</span>
-                <span className="font-semibold text-sm">{ind.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* - - - - */}
-
-      {/* ── Industries Banner ── */}
-      <h1>Option 2</h1>
-      <section className="bg-[#1e3a8a] py-8 relative overflow-hidden">
-        {/* Decorative element */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full filter blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full filter blur-3xl"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 relative">
-          <p className="text-center text-white font-bold text-sm uppercase tracking-widest mb-6">
-            Delivering Cyber Confidence Across Multiple Industries
-          </p>
-
-          {/* First row */}
-          <div className="flex flex-wrap justify-center gap-4 mb-4">
-            {industries
-              .slice(0, Math.ceil(industries.length / 2))
-              .map((ind) => (
-                <div
-                  key={ind.name}
-                  className="flex items-center gap-3 bg-white rounded-lg px-5 py-3 text-[#1e3a8a] font-semibold shadow-lg"
-                >
-                  <span className="text-2xl">{ind.icon}</span>
-                  <span>{ind.name}</span>
-                </div>
-              ))}
-          </div>
-
-          {/* Second row*/}
-          <div className="flex flex-wrap justify-center gap-4">
-            {industries.slice(Math.ceil(industries.length / 2)).map((ind) => (
-              <div
-                key={ind.name}
-                className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 text-white font-semibold border border-white/20"
-              >
-                <span className="text-2xl">{ind.icon}</span>
-                <span>{ind.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* - - - - */}
-
-      <h1>Option 3</h1>
-      {/* ── Industries Banner ── */}
-      <section className="bg-[#1e3a8a] py-8">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-white font-bold text-sm uppercase tracking-widest mb-6">
-            Delivering Cyber Confidence Across Multiple Industries
-          </p>
-
-          <div className="space-y-4">
-            <div className="relative overflow-hidden">
-              <div className="flex animate-marquee-reverse whitespace-nowrap">
-                {[...industries, ...industries].reverse().map((ind, index) => (
-                  <div
-                    key={`${ind.name}-${index}-reverse`}
-                    className="flex items-center gap-3 mx-3 bg-white rounded-full px-6 py-3 text-[#1e3a8a] font-semibold shadow-lg"
-                  >
-                    <span className="text-2xl">{ind.icon}</span>
-                    <span>{ind.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <style jsx>{`
-          @keyframes marquee {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-          .animate-marquee {
-            animation: marquee 20s linear infinite;
-          }
-          .animate-marquee-reverse {
-            animation: marquee 20s linear infinite reverse;
-          }
-        `}</style>
-      </section>
-      {/* - - - - */}
-
-      <h1>Option 4</h1>
-      {/* ── Industries Banner ── */}
-      <section className="bg-[#1e3a8a] py-8">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-white font-bold text-sm uppercase tracking-widest mb-6">
-            Delivering Cyber Confidence Across Multiple Industries
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {industries.map((ind, index) => (
-              <div
-                key={ind.name}
-                className="flex items-center gap-2 text-white font-medium p-2 rounded-lg hover:bg-white/10 transition-colors"
-                style={{
-                  gridRow: index < 4 ? "1" : "2",
-                  gridColumn: index < 4 ? index + 1 : index - 3,
-                }}
-              >
-                <span className="text-2xl bg-white/20 rounded-full p-2">
-                  {ind.icon}
-                </span>
-                <span className="text-sm">{ind.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* - - - - */}
-
-      <h1>Option 5</h1>
       {/* ── Industries Banner ── */}
       <section className="bg-[#1e3a8a] py-10 border-y-4 border-[#fbbf24]">
         <div className="max-w-7xl mx-auto px-4">
@@ -433,6 +276,7 @@ export default function Home({ navigate }) {
             {industries.map((ind, index) => (
               <div
                 key={ind.name}
+                onClick={() => navigate(ind.page)}
                 className="flex items-center gap-3 bg-[#1e3a8a] p-4 text-white hover:bg-white/10 transition-colors"
               >
                 <span className="text-3xl">{ind.icon}</span>
