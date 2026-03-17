@@ -1,0 +1,11 @@
+deployment:
+  tasks:
+    - export NVM_DIR=/home/username/.nvm
+    - source $NVM_DIR/nvm.sh
+    - nvm use 20
+
+    - npm install
+    - npm run build
+
+    - export DEPLOYPATH=/home/username/public_html/
+    - /bin/cp -R dist/* $DEPLOYPATH
