@@ -9,7 +9,7 @@ export default function RislixLogo({
     <div className="flex items-center gap-3">
       {/* Image from assets */}
       <img
-        src="/assets/RislixCyberSecurityLogo-removebg.png"
+        src="/assets/Rislix Logo.png"
         alt="Rislix Cyber Security Logo"
         width={size}
         height={size * 1.1}
@@ -29,8 +29,8 @@ export default function RislixLogo({
               textSize === "lg"
                 ? "text-2xl"
                 : textSize === "sm"
-                ? "text-base"
-                : "text-xl"
+                  ? "text-base"
+                  : "text-xl"
             }`}
           >
             <span className="text-[#1e3a8a]">RISL</span>
