@@ -619,7 +619,7 @@ export default function Home({ navigate }) {
       </section>
 
       {/* ── Testimonials ── */}
-      <section className="py-20 bg-gray-50">
+      {/* <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeader title="What Our Clients Say" subtitle="Testimonials" />
           <div className="grid md:grid-cols-2 gap-6">
@@ -637,7 +637,7 @@ export default function Home({ navigate }) {
             />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── FAQ ── */}
       <section className="py-20 bg-white">
