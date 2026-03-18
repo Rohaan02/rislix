@@ -1,13 +1,6 @@
 deployment:
   tasks:
-    - export NVM_DIR=/home/rislixco/.nvm
-    - source $NVM_DIR/nvm.sh
-    - nvm use 20
-
     - npm ci
     - npm run build
-
-    - export DEPLOYPATH=/home/rislixco/public_html/
-
-    - /bin/rm -rf $DEPLOYPATH/*
-    - /bin/cp -R dist/* $DEPLOYPATH
+    - /bin/rm -rf /home/rislixco/public_html/*
+    - /bin/cp -R dist/* /home/rislixco/public_html
