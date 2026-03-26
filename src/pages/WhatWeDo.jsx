@@ -2,11 +2,85 @@ import SectionHeader from "../components/SectionHeader";
 import Button from "../components/Button";
 import ContactForm from "../components/ContactForm";
 import { useEffect } from "react";
+import {
+  Shield,
+  Lock,
+  ClipboardList,
+  Target,
+  Building2,
+  Repeat,
+  Brain,
+  Headset,
+  CheckCircle,
+  ChevronRight,
+  Award,
+  FileText,
+  Users,
+  Globe,
+  Database,
+  Cloud,
+  Network,
+  LockKeyhole,
+  Fingerprint,
+  Gavel,
+  RefreshCw,
+  Sparkles,
+  Zap,
+  Rocket,
+  ShieldCheck,
+  BarChart,
+  Settings,
+  Activity,
+  AlertTriangle,
+  Eye,
+  Key,
+  UserCheck,
+  Server,
+  Wifi,
+  Smartphone,
+  CloudCog,
+  ShieldAlert,
+  Bug,
+  Scan,
+  LockIcon,
+  Home,
+  Briefcase,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Calendar,
+  MessageSquare,
+  HelpCircle,
+  Info,
+  Book,
+  FileText as FileTextIcon,
+  Video,
+  Play,
+  Pause,
+  Volume2,
+  Maximize2,
+  Minimize2,
+  XCircle,
+  CheckSquare,
+  Square,
+  Radio,
+  Download,
+  Upload,
+  Trash2,
+  Edit,
+  Save,
+  Copy,
+  Share2,
+  Heart,
+  ThumbsUp,
+  ThumbsDown,
+} from "lucide-react";
 
-const services = [
+const servicesData = [
   {
     id: "vciso",
-    icon: "🛡️",
+    icon: Shield,
     title: "vCISO – Virtual Chief Information Security Officer",
     desc: "RISLIX provides executive-level cybersecurity leadership to organizations that require strategic direction without the cost and overhead of a full-time CISO.",
     delivers: [
@@ -23,7 +97,7 @@ const services = [
   },
   {
     id: "vdpo",
-    icon: "🔏",
+    icon: Lock,
     title: "vDPO – Virtual Data Protection Officer",
     desc: "RISLIX provides expert data privacy leadership tailored to global and regional privacy laws.",
     delivers: [
@@ -53,7 +127,7 @@ const services = [
   },
   {
     id: "grc",
-    icon: "📋",
+    icon: ClipboardList,
     title: "Governance, Risk & Compliance (GRC)",
     desc: "A premium service offering tailored governance frameworks, controls, policies, and regulatory alignment.",
     sub: [
@@ -122,7 +196,7 @@ const services = [
   },
   {
     id: "vapt",
-    icon: "🎯",
+    icon: Target,
     title: "Cybersecurity Assessments & VAPT",
     desc: "A comprehensive service for identifying, validating, and mitigating vulnerabilities across digital ecosystems.",
     portfolio: [
@@ -144,7 +218,7 @@ const services = [
   },
   {
     id: "architecture",
-    icon: "🏗️",
+    icon: Building2,
     title: "Enterprise Security Architecture & Hardening",
     desc: "End-to-end design and enhancement of secure digital environments.",
     delivers: [
@@ -159,7 +233,7 @@ const services = [
   },
   {
     id: "business-continuity",
-    icon: "♻️",
+    icon: Repeat,
     title: "Business Continuity, Disaster Recovery & ISO 22301",
     desc: "Ensuring organizations remain resilient against disruption.",
     delivers: [
@@ -172,7 +246,7 @@ const services = [
   },
   {
     id: "ai-governance",
-    icon: "🤖",
+    icon: Brain,
     title: "AI Governance & Responsible AI Compliance",
     desc: "Aligning modern AI systems with global ethical, safety, and regulatory standards.",
     delivers: [
@@ -184,7 +258,7 @@ const services = [
   },
   {
     id: "managed-advisory",
-    icon: "📡",
+    icon: Headset,
     title: "Managed Cybersecurity Advisory (Continuous Support)",
     desc: "A tailored subscription model providing ongoing advisory services.",
     delivers: [
@@ -220,6 +294,10 @@ export default function WhatWeDo({ navigate }) {
     }
   }, []);
 
+  const CheckIcon = () => (
+    <CheckCircle className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5" />
+  );
+
   return (
     <div>
       <section className="bg-[#0f172a] text-white py-24">
@@ -237,181 +315,174 @@ export default function WhatWeDo({ navigate }) {
 
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 space-y-10">
-          {services.map((s, i) => (
-            <div
-              key={i}
-              id={s.id}
-              className={`bg-white rounded-2xl shadow-md overflow-hidden flex flex-col lg:flex-row ${
-                i % 2 === 1 ? "lg:flex-row-reverse" : ""
-              }`}
-            >
-              <div className="lg:w-1/3 bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] p-10 flex flex-col justify-center items-center text-white text-center">
-                <span className="text-6xl mb-4">{s.icon}</span>
-                <h2 className="text-xl font-black leading-snug">{s.title}</h2>
-              </div>
-              <div className="lg:w-2/3 p-10">
-                <p className="text-gray-600 leading-relaxed mb-6">{s.desc}</p>
+          {servicesData.map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+              <div
+                key={index}
+                id={service.id}
+                className={`bg-white rounded-2xl shadow-md overflow-hidden flex flex-col lg:flex-row ${
+                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
+                }`}
+              >
+                <div className="lg:w-1/3 bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] p-10 flex flex-col justify-center items-center text-white text-center">
+                  <IconComponent className="w-16 h-16 mb-4 text-[#16a34a]" />
+                  <h2 className="text-xl font-black leading-snug">
+                    {service.title}
+                  </h2>
+                </div>
+                <div className="lg:w-2/3 p-10">
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    {service.desc}
+                  </p>
 
-                {s.delivers && (
-                  <div className="mb-6">
-                    <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">
-                      What We Deliver
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {s.delivers.map((d) => (
-                        <div
-                          key={d}
-                          className="flex items-start gap-2 text-sm text-gray-600"
-                        >
-                          <svg
-                            className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          {d}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {s.standards && (
-                  <div className="bg-[#f0fdf4] border border-[#16a34a30] rounded-xl px-5 py-3 mb-4">
-                    <p className="text-xs font-bold text-[#16a34a] uppercase tracking-wide mb-1">
-                      Standards & Frameworks Covered
-                    </p>
-                    <p className="text-sm text-gray-600">{s.standards}</p>
-                  </div>
-                )}
-
-                {s.regions && (
-                  <div className="mb-6">
-                    <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">
-                      Regulations Covered (Region-Wise)
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {s.regions.map((r) => (
-                        <div
-                          key={r.label}
-                          className="bg-gray-50 rounded-xl p-4"
-                        >
-                          <p className="font-bold text-[#16a34a] text-xs mb-2">
-                            {r.label}
-                          </p>
-                          {r.items.map((item) => (
-                            <p
-                              key={item}
-                              className="text-xs text-gray-600 mb-1"
-                            >
-                              • {item}
-                            </p>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {s.sub &&
-                  s.sub.map((sub, j) => (
-                    <div key={j} className="mb-6">
-                      <p className="font-bold text-[#0f172a] mb-2">
-                        {sub.title}
+                  {service.delivers && (
+                    <div className="mb-6">
+                      <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">
+                        What We Deliver
                       </p>
-                      {sub.intro && (
-                        <p className="text-sm text-gray-500 mb-2">
-                          {sub.intro}
-                        </p>
-                      )}
-                      {sub.items && (
-                        <div className="grid grid-cols-2 gap-1 mb-2">
-                          {sub.items.map((it) => (
-                            <p key={it} className="text-xs text-gray-600">
-                              • {it}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {service.delivers.map((deliver) => (
+                          <div
+                            key={deliver}
+                            className="flex items-start gap-2 text-sm text-gray-600"
+                          >
+                            <CheckIcon />
+                            {deliver}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {service.standards && (
+                    <div className="bg-[#f0fdf4] border border-[#16a34a30] rounded-xl px-5 py-3 mb-4">
+                      <p className="text-xs font-bold text-[#16a34a] uppercase tracking-wide mb-1">
+                        Standards & Frameworks Covered
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {service.standards}
+                      </p>
+                    </div>
+                  )}
+
+                  {service.regions && (
+                    <div className="mb-6">
+                      <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">
+                        Regulations Covered (Region-Wise)
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {service.regions.map((region) => (
+                          <div
+                            key={region.label}
+                            className="bg-gray-50 rounded-xl p-4"
+                          >
+                            <p className="font-bold text-[#16a34a] text-xs mb-2">
+                              {region.label}
                             </p>
-                          ))}
-                        </div>
-                      )}
-                      {sub.regions && (
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
-                          {sub.regions.map((r) => (
-                            <div
-                              key={r.label}
-                              className="bg-gray-50 rounded-xl p-3"
-                            >
-                              <p className="font-bold text-[#16a34a] text-xs mb-1">
-                                {r.label}
+                            {region.items.map((item) => (
+                              <p
+                                key={item}
+                                className="text-xs text-gray-600 mb-1"
+                              >
+                                • {item}
                               </p>
-                              {r.items.map((it) => (
-                                <p key={it} className="text-xs text-gray-500">
-                                  • {it}
-                                </p>
-                              ))}
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                            ))}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
+                  )}
 
-                {s.portfolio && (
-                  <div className="mb-4">
-                    <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">
-                      Assessment Portfolio
-                    </p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {s.portfolio.map((d) => (
-                        <div
-                          key={d}
-                          className="flex items-start gap-2 text-sm text-gray-600"
-                        >
-                          <svg
-                            className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
+                  {service.sub &&
+                    service.sub.map((subSection, idx) => (
+                      <div key={idx} className="mb-6">
+                        <p className="font-bold text-[#0f172a] mb-2">
+                          {subSection.title}
+                        </p>
+                        {subSection.intro && (
+                          <p className="text-sm text-gray-500 mb-2">
+                            {subSection.intro}
+                          </p>
+                        )}
+                        {subSection.items && (
+                          <div className="grid grid-cols-2 gap-1 mb-2">
+                            {subSection.items.map((item) => (
+                              <p key={item} className="text-xs text-gray-600">
+                                • {item}
+                              </p>
+                            ))}
+                          </div>
+                        )}
+                        {subSection.regions && (
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
+                            {subSection.regions.map((region) => (
+                              <div
+                                key={region.label}
+                                className="bg-gray-50 rounded-xl p-3"
+                              >
+                                <p className="font-bold text-[#16a34a] text-xs mb-1">
+                                  {region.label}
+                                </p>
+                                {region.items.map((item) => (
+                                  <p
+                                    key={item}
+                                    className="text-xs text-gray-500"
+                                  >
+                                    • {item}
+                                  </p>
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+
+                  {service.portfolio && (
+                    <div className="mb-4">
+                      <p className="font-bold text-[#0f172a] mb-3 text-sm uppercase tracking-wide">
+                        Assessment Portfolio
+                      </p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {service.portfolio.map((item) => (
+                          <div
+                            key={item}
+                            className="flex items-start gap-2 text-sm text-gray-600"
                           >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          {d}
-                        </div>
+                            <CheckIcon />
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {service.deliverables && (
+                    <div className="bg-[#f0fdf4] border border-[#16a34a30] rounded-xl p-4">
+                      <p className="font-bold text-[#16a34a] text-xs mb-2 uppercase tracking-wide">
+                        Deliverables
+                      </p>
+                      {service.deliverables.map((item) => (
+                        <p key={item} className="text-xs text-gray-600 mb-1">
+                          • {item}
+                        </p>
                       ))}
                     </div>
-                  </div>
-                )}
-                {s.deliverables && (
-                  <div className="bg-[#f0fdf4] border border-[#16a34a30] rounded-xl p-4">
-                    <p className="font-bold text-[#16a34a] text-xs mb-2 uppercase tracking-wide">
-                      Deliverables
-                    </p>
-                    {s.deliverables.map((d) => (
-                      <p key={d} className="text-xs text-gray-600 mb-1">
-                        • {d}
-                      </p>
-                    ))}
-                  </div>
-                )}
+                  )}
 
-                <div className="mt-6">
-                  <Button
-                    onClick={() => navigate("contact")}
-                    className="bg-[#16a34a] hover:bg-[#15803d] text-white rounded-full px-6 py-2.5 font-bold transition-colors"
-                  >
-                    Get a Free Assessment
-                  </Button>
+                  <div className="mt-6">
+                    <Button
+                      onClick={() => navigate("contact")}
+                      className="bg-[#16a34a] hover:bg-[#15803d] text-white rounded-full px-6 py-2.5 font-bold transition-colors"
+                    >
+                      Get a Free Assessment
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

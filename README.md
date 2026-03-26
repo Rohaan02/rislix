@@ -1,6 +1,4 @@
-# Unity Metrix - React Website Replica
-
-A complete React.js + Tailwind CSS replica of [unitymetrix.com](https://unitymetrix.com/), a UK cybersecurity services company.
+# Rislix - React Website Replica
 
 ## 📁 Project Structure
 
@@ -45,29 +43,52 @@ npm run dev
 
 ## 🎨 Design Tokens
 
-| Token | Value |
-|-------|-------|
-| Primary | `#00d4ff` (cyan) |
-| Dark | `#1a1a2e` (navy) |
-| Font | Inter (Google Fonts) |
+| Token | Value                |
+| ----- | -------------------- |
+| Font  | Inter (Google Fonts) |
 
 ## 📄 Pages Included
 
-| Page | Route (internal) | Description |
-|------|-----------------|-------------|
-| Home | `home` | Full landing page |
-| What We Do | `what-we-do` | All 11 services |
-| Who We Help | `who-we-help` | SME, Entrepreneur, Director profiles |
-| Pricing | `pricing` | 6 pricing plans |
-| Case Studies | `case-studies` | 4 client success stories |
-| About Us | `about-us` | Team, values, certifications |
-| Knowledge Centre | `knowledge-centre` | 10 articles with tag filters |
-| Contact | `contact` | Form + contact details |
+| Page             | Route (internal)   | Description                          |
+| ---------------- | ------------------ | ------------------------------------ |
+| Home             | `home`             | Full landing page                    |
+| What We Do       | `what-we-do`       | All 11 services                      |
+| Who We Help      | `who-we-help`      | SME, Entrepreneur, Director profiles |
+| Pricing          | `pricing`          | 6 pricing plans                      |
+| Case Studies     | `case-studies`     | 4 client success stories             |
+| About Us         | `about-us`         | Team, values, certifications         |
+| Knowledge Centre | `knowledge-centre` | 10 articles with tag filters         |
+| Contact          | `contact`          | Form + contact details               |
 
 ## 🔧 Customisation
 
 Navigation uses a simple `currentPage` state in `App.jsx`. To add a page:
+
 1. Create `src/pages/YourPage.jsx`
 2. Import it in `App.jsx`
 3. Add a case to the `renderPage()` switch
 4. Add a nav link in `Navbar.jsx`
+
+## 📦 Deployment Instructions (cPanel)
+
+If you are using the pre-built dist folder for production:
+
+1. Push the dist folder to your GitHub repository.
+2. Log in to cPanel → File Manager → repositories/rislix/.
+3. Remove the previous dist folder from the server.
+4. Go to cPanel → Git Version Control → Pull or Deploy.
+5. Click “Update from Remote” to pull the latest changes.
+6. Visit the deploy script in your browser:
+
+```bash
+https://rislix.com/deploy.php?key=rohaan123
+```
+
+7. Your website will now be live with the latest changes.
+   ✅ This workflow avoids building on the server and ensures your latest production-ready frontend is deployed safely.
+
+# For Lucide React (recommended)
+
+```bash
+npm install lucide-react
+```

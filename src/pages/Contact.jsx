@@ -1,5 +1,32 @@
 import ContactForm from "../components/ContactForm";
 import SectionHeader from "../components/SectionHeader";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Calendar,
+  AlertCircle,
+  Send,
+  MessageSquare,
+  Users,
+  Globe,
+  CheckCircle,
+  Shield,
+  Lock,
+  Headphones,
+  Sparkles,
+  Award,
+  Zap,
+  Star,
+  Heart,
+  ThumbsUp,
+  HelpCircle,
+  Info,
+  Briefcase,
+  Building2,
+  ArrowRight,
+} from "lucide-react";
 
 export default function Contact({ navigate }) {
   return (
@@ -42,55 +69,52 @@ export default function Contact({ navigate }) {
             <div className="space-y-5">
               {[
                 {
-                  icon: "📧",
+                  icon: Mail,
                   label: "General Enquiries",
                   value: "info@rislix.com",
                   href: "mailto:info@rislix.com",
                 },
                 {
-                  icon: "📞",
+                  icon: Phone,
                   label: "Phone",
                   value: "+44 7404 224899",
                   href: "tel:+447404224899",
                 },
-                // {
-                //   icon: "📍",
-                //   label: "Registered Address",
-                //   value:
-                //     "167-169 Great Portland Street, 5th Floor, London, W1W 5PF",
-                //   href: null,
-                // },
-              ].map((c, i) => (
-                <div
-                  key={i}
-                  className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex items-start gap-4"
-                >
-                  <div className="w-12 h-12 bg-[#f0fdf4] rounded-xl flex items-center justify-center text-xl shrink-0 border border-[#16a34a30]">
-                    {c.icon}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-400 mb-1">
-                      {c.label}
-                    </p>
-                    {c.href ? (
-                      <a
-                        href={c.href}
-                        className="font-bold text-[#0f172a] hover:text-[#16a34a] transition-colors"
-                      >
-                        {c.value}
-                      </a>
-                    ) : (
-                      <p className="font-semibold text-[#0f172a] text-sm">
-                        {c.value}
+              ].map((contact, i) => {
+                const IconComponent = contact.icon;
+                return (
+                  <div
+                    key={i}
+                    className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex items-start gap-4 hover:shadow-lg transition-shadow"
+                  >
+                    <div className="w-12 h-12 bg-[#f0fdf4] rounded-xl flex items-center justify-center shrink-0 border border-[#16a34a30]">
+                      <IconComponent className="w-6 h-6 text-[#16a34a]" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-400 mb-1">
+                        {contact.label}
                       </p>
-                    )}
+                      {contact.href ? (
+                        <a
+                          href={contact.href}
+                          className="font-bold text-[#0f172a] hover:text-[#16a34a] transition-colors"
+                        >
+                          {contact.value}
+                        </a>
+                      ) : (
+                        <p className="font-semibold text-[#0f172a] text-sm">
+                          {contact.value}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] rounded-2xl p-8 mt-6 text-white">
-              <h3 className="font-bold text-lg mb-4 text-[#16a34a]">
+              <h3 className="font-bold text-lg mb-4 text-[#16a34a] flex items-center gap-2">
+                <Clock className="w-5 h-5" />
                 Business Hours
               </h3>
               <div className="space-y-2 text-sm text-gray-300">
@@ -111,14 +135,16 @@ export default function Contact({ navigate }) {
               </div>
               <div className="mt-4 pt-4 border-t border-[#ffffff15]">
                 <div className="flex items-center gap-2 text-sm text-[#16a34a]">
-                  <span className="w-2 h-2 bg-[#16a34a] rounded-full animate-pulse"></span>
+                  <div className="w-2 h-2 bg-[#16a34a] rounded-full animate-pulse"></div>
+                  <Headphones className="w-4 h-4" />
                   Managed Advisory clients receive 24/7 support
                 </div>
               </div>
             </div>
 
             <div className="bg-[#16a34a] rounded-2xl p-6 mt-5 text-white">
-              <h3 className="font-black text-lg mb-1">
+              <h3 className="font-black text-lg mb-1 flex items-center gap-2">
+                <Sparkles className="w-5 h-5" />
                 Free 30-Minute Consultation
               </h3>
               <p className="text-white/80 text-sm mb-3">
@@ -127,8 +153,9 @@ export default function Contact({ navigate }) {
               </p>
               <a
                 href="mailto:info@rislix.com"
-                className="font-black text-white text-lg hover:underline"
+                className="font-black text-white text-lg hover:underline inline-flex items-center gap-2"
               >
+                <Mail className="w-5 h-5" />
                 info@rislix.com
               </a>
             </div>
@@ -147,10 +174,7 @@ export default function Contact({ navigate }) {
             href="mailto:info@rislix.com"
             className="inline-flex items-center gap-2 bg-[#16a34a] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#15803d] transition-colors"
           >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-            </svg>
+            <Mail className="w-5 h-5" />
             info@rislix.com
           </a>
         </div>

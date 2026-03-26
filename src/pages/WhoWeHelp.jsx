@@ -1,10 +1,32 @@
 import { useEffect } from "react";
 import Button from "../components/Button";
+import {
+  Landmark,
+  Building2,
+  GraduationCap,
+  Wifi,
+  Monitor,
+  Settings,
+  CheckCircle,
+  ArrowRight,
+  Shield,
+  Lock,
+  Database,
+  Cloud,
+  FileCheck,
+  Award,
+  Briefcase,
+  Globe,
+  Users,
+  Mail,
+  Phone,
+  MessageCircle,
+} from "lucide-react";
 
-const industries = [
+const industriesData = [
   {
     id: "government",
-    icon: "🏛️",
+    icon: Landmark,
     title: "Government",
     concern:
       "We need to meet national cybersecurity mandates but lack internal security expertise.",
@@ -18,7 +40,7 @@ const industries = [
   },
   {
     id: "banking",
-    icon: "🏦",
+    icon: Building2,
     title: "Banking & Finance",
     concern:
       "Our regulators expect SAMA or QCB compliance and our audit is next quarter.",
@@ -32,7 +54,7 @@ const industries = [
   },
   {
     id: "education",
-    icon: "🎓",
+    icon: GraduationCap,
     title: "Education",
     concern:
       "We handle sensitive student data and need GDPR and FERPA compliance without a large IT team.",
@@ -46,7 +68,7 @@ const industries = [
   },
   {
     id: "telecom",
-    icon: "📡",
+    icon: Wifi,
     title: "Telecom",
     concern:
       "We're a licensed operator and need to comply with national cybersecurity and data protection laws.",
@@ -60,7 +82,7 @@ const industries = [
   },
   {
     id: "information-technology",
-    icon: "💻",
+    icon: Monitor,
     title: "Information Technology",
     concern:
       "Our clients demand ISO 27001 certification and we need to move fast without disrupting delivery.",
@@ -74,7 +96,7 @@ const industries = [
   },
   {
     id: "software-it",
-    icon: "⚙️",
+    icon: Settings,
     title: "Software & IT",
     concern:
       "We build SaaS products and need to bake security and compliance into our development lifecycle.",
@@ -90,20 +112,30 @@ const industries = [
 
 export default function WhoWeHelp({ navigate }) {
   useEffect(() => {
-    // Check if there's a hash in the URL
     const hash = window.location.hash;
     if (hash) {
-      // Remove the # character
       const id = hash.substring(1);
       const element = document.getElementById(id);
       if (element) {
-        // Small delay to ensure rendering is complete
         setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+          const navbar = document.querySelector("nav");
+          const navbarHeight = navbar ? navbar.offsetHeight : 80;
+          const elementPosition =
+            element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navbarHeight - 10;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }, 200);
       }
     }
   }, []);
+
+  const CheckIcon = () => (
+    <CheckCircle className="w-5 h-5 text-[#16a34a] shrink-0 mt-0.5" />
+  );
 
   return (
     <div>
@@ -122,80 +154,73 @@ export default function WhoWeHelp({ navigate }) {
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 space-y-16">
-          {industries.map((ind, i) => (
-            <div
-              key={i}
-              id={ind.id}
-              className={`grid lg:grid-cols-2 gap-12 items-center scroll-mt-[100px]`}
-            >
-              <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-4xl">{ind.icon}</span>
-                  <h2 className="text-3xl font-black text-[#0f172a]">
-                    {ind.title}
-                  </h2>
-                </div>
-                <div className="bg-gray-50 border-l-4 border-[#16a34a] rounded-r-xl p-4 mb-6 italic text-gray-600">
-                  "{ind.concern}"
-                </div>
-                <div className="space-y-2 mb-6">
-                  {ind.points.map((pt) => (
-                    <div
-                      key={pt}
-                      className="flex items-start gap-2 text-gray-600"
-                    >
-                      <svg
-                        className="w-5 h-5 text-[#16a34a] shrink-0 mt-0.5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      {pt}
-                    </div>
-                  ))}
-                </div>
-                <Button
-                  onClick={() => navigate("contact")}
-                  className="bg-[#16a34a] hover:bg-[#15803d] text-white rounded-full px-6 py-3 font-bold transition-colors"
-                >
-                  Get a Free Assessment
-                </Button>
-              </div>
-              <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                <div className="bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] rounded-3xl p-10 text-white">
-                  <h3 className="font-bold text-lg mb-4 text-[#16a34a]">
-                    Relevant Frameworks
-                  </h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {ind.frameworks.map((f) => (
+          {industriesData.map((industry, index) => {
+            const IconComponent = industry.icon;
+            return (
+              <div
+                key={index}
+                id={industry.id}
+                className={`grid lg:grid-cols-2 gap-12 items-center scroll-mt-[100px]`}
+              >
+                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <IconComponent className="w-12 h-12 text-[#16a34a]" />
+                    <h2 className="text-3xl font-black text-[#0f172a]">
+                      {industry.title}
+                    </h2>
+                  </div>
+                  <div className="bg-gray-50 border-l-4 border-[#16a34a] rounded-r-xl p-4 mb-6 italic text-gray-600">
+                    "{industry.concern}"
+                  </div>
+                  <div className="space-y-2 mb-6">
+                    {industry.points.map((point) => (
                       <div
-                        key={f}
-                        className="bg-[#ffffff12] rounded-xl px-4 py-3 text-sm font-semibold text-center border border-[#ffffff10]"
+                        key={point}
+                        className="flex items-start gap-2 text-gray-600"
                       >
-                        {f}
+                        <CheckIcon />
+                        {point}
                       </div>
                     ))}
                   </div>
-                  <div className="mt-6 pt-6 border-t border-[#ffffff15]">
-                    <p className="text-gray-400 text-sm">
-                      Need a custom solution for your industry?
-                    </p>
-                    <button
-                      onClick={() => navigate("contact")}
-                      className="text-[#16a34a] font-semibold text-sm hover:underline mt-1 block"
-                    >
-                      Talk to our experts →
-                    </button>
+                  <Button
+                    onClick={() => navigate("contact")}
+                    className="bg-[#16a34a] hover:bg-[#15803d] text-white rounded-full px-6 py-3 font-bold transition-colors"
+                  >
+                    Get a Free Assessment
+                  </Button>
+                </div>
+                <div className={index % 2 === 1 ? "lg:order-1" : ""}>
+                  <div className="bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] rounded-3xl p-10 text-white">
+                    <h3 className="font-bold text-lg mb-4 text-[#16a34a]">
+                      Relevant Frameworks
+                    </h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      {industry.frameworks.map((framework) => (
+                        <div
+                          key={framework}
+                          className="bg-[#ffffff12] rounded-xl px-4 py-3 text-sm font-semibold text-center border border-[#ffffff10]"
+                        >
+                          {framework}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-6 pt-6 border-t border-[#ffffff15]">
+                      <p className="text-gray-400 text-sm">
+                        Need a custom solution for your industry?
+                      </p>
+                      <button
+                        onClick={() => navigate("contact")}
+                        className="text-[#16a34a] font-semibold text-sm hover:underline mt-1 flex items-center gap-1"
+                      >
+                        Talk to our experts <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

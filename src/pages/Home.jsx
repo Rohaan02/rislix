@@ -1,78 +1,103 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import SectionHeader from "../components/SectionHeader";
-import ServiceCard from "../components/ServiceCard";
 import StatCard from "../components/StatCard";
 import ProcessStep from "../components/ProcessStep";
-import TestimonialCard from "../components/TestimonialCard";
 import ContactForm from "../components/ContactForm";
 import HeroBg from "../components/HeroBg";
+import {
+  Shield,
+  Lock,
+  ClipboardList,
+  Target,
+  Building2,
+  Repeat,
+  Brain,
+  Headset,
+  Landmark,
+  GraduationCap,
+  Wifi,
+  Monitor,
+  Code2,
+  Flag,
+  CheckCircle,
+  Scale,
+  RefreshCw,
+  Headphones,
+  Gavel,
+  Award,
+  Lightbulb,
+  Mail,
+  ChevronDown,
+  ArrowRight,
+  LockKeyhole,
+} from "lucide-react";
 
-const services = [
+const servicesData = [
   {
-    icon: "🛡️",
+    icon: Shield,
     title: "vCISO",
     sub: "Virtual Chief Information Security Officer",
     desc: "Executive-level cybersecurity leadership without the cost of a full-time CISO.",
   },
   {
-    icon: "🔏",
+    icon: Lock,
     title: "vDPO",
     sub: "Virtual Data Protection Officer",
     desc: "Expert data privacy leadership tailored to global and regional privacy laws.",
   },
   {
-    icon: "📋",
+    icon: ClipboardList,
     title: "GRC",
     sub: "Governance, Risk & Compliance",
     desc: "Premium tailored governance frameworks, controls, policies, and regulatory alignment.",
   },
   {
-    icon: "🎯",
+    icon: Target,
     title: "VAPT",
     sub: "Cybersecurity Assessments & VAPT",
     desc: "Identifying, validating, and mitigating vulnerabilities across digital ecosystems.",
   },
   {
-    icon: "🏗️",
+    icon: Building2,
     title: "Security Architecture",
     sub: "Enterprise Security Architecture & Hardening",
     desc: "End-to-end design and enhancement of secure digital environments.",
   },
   {
-    icon: "♻️",
+    icon: Repeat,
     title: "BCM / DR",
     sub: "Business Continuity & ISO 22301",
     desc: "Ensuring organizations remain resilient against disruption with BIA, DR, and crisis plans.",
   },
   {
-    icon: "🤖",
+    icon: Brain,
     title: "AI Governance",
     sub: "Responsible AI Compliance",
     desc: "Aligning AI systems with global ethical, safety, and regulatory standards.",
   },
   {
-    icon: "📡",
+    icon: Headset,
     title: "Managed Advisory",
     sub: "Continuous Cybersecurity Advisory",
     desc: "Ongoing subscription-based advisory — compliance monitoring, audits, risk registers.",
   },
 ];
 
-const industries = [
-  { icon: "🏛️", name: "Government", page: "who-we-help#government" },
-  { icon: "🏦", name: "Banking & Finance", page: "who-we-help#banking" },
-  { icon: "🎓", name: "Education", page: "who-we-help#education" },
-  { icon: "📡", name: "Telecom", page: "who-we-help#telecom" },
+const industriesData = [
+  { icon: Landmark, name: "Government", page: "who-we-help#government" },
+  { icon: Building2, name: "Banking & Finance", page: "who-we-help#banking" },
+  { icon: GraduationCap, name: "Education", page: "who-we-help#education" },
+  { icon: Wifi, name: "Telecom", page: "who-we-help#telecom" },
   {
-    icon: "💻",
+    icon: Monitor,
     name: "Information Technology",
     page: "who-we-help#information-technology",
   },
-  { icon: "⚙️", name: "Software & IT", page: "who-we-help#software-it" },
+  { icon: Code2, name: "Software & IT", page: "who-we-help#software-it" },
 ];
 
-const faqs = [
+const faqsData = [
   {
     q: "What is a vCISO and does my organization need one?",
     a: "A vCISO (Virtual CISO) provides executive-level cybersecurity leadership without the overhead of a full-time hire. If your organization needs strategic direction, compliance oversight, board reporting, or risk governance — a vCISO is the right fit.",
@@ -99,30 +124,30 @@ const faqs = [
   },
 ];
 
-const news = [
+const newsData = [
   {
     title: "Understanding the NCA ECC Framework for Saudi Organizations",
     tag: "Guide",
     date: "Feb 2026",
-    icon: "🇸🇦",
+    icon: Flag,
   },
   {
     title: "ISO 42001: What the AI Management Standard Means for Your Business",
     tag: "Article",
     date: "Jan 2026",
-    icon: "🤖",
+    icon: Brain,
   },
   {
     title: "DORA Compliance: What Financial Firms Need to Know",
     tag: "News",
     date: "Dec 2025",
-    icon: "🏦",
+    icon: Building2,
   },
   {
     title: "vCISO vs Full-Time CISO: Which Is Right for Your Organization?",
     tag: "Guide",
     date: "Nov 2025",
-    icon: "🛡️",
+    icon: Shield,
   },
 ];
 
@@ -133,9 +158,7 @@ export default function Home({ navigate }) {
     <div>
       {/* ── Hero ── */}
       <section className="relative bg-[#0f172a] text-white overflow-hidden min-h-[88vh] flex items-center">
-        {/* ── Animated Canvas Background ── */}
         <HeroBg />
-        {/* background effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#1e3a8a08] rounded-full blur-3xl -translate-y-1/3 translate-x-1/4"></div>
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#16a34a05] rounded-full blur-2xl translate-y-1/2 -translate-x-1/4"></div>
@@ -150,10 +173,6 @@ export default function Home({ navigate }) {
         </div>
         <div className="relative max-w-7xl mx-auto px-6 py-28 grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            {/* <div className="inline-flex items-center gap-2 bg-[#16a34a18] text-[#16a34a] px-4 py-2 rounded-full text-sm font-semibold mb-8 border border-[#16a34a30]">
-              <span className="w-2 h-2 bg-[#16a34a] rounded-full animate-pulse"></span>
-              Cybersecurity · Privacy · GRC · AI Governance
-            </div> */}
             <h1 className="text-4xl lg:text-[3.2rem] font-black leading-tight mb-6 tracking-tight">
               Compliance That Inspires
               <br />
@@ -179,36 +198,15 @@ export default function Home({ navigate }) {
                 variant="outline"
                 size="lg"
                 onClick={() => navigate("what-we-do")}
-                className="border-white text-white hover:bg-white hover:text-[#0f172a] rounded-full"
+                className="border-white text-white hover:bg-white hover:!text-[#0f172a] rounded-full"
               >
                 Explore Services
               </Button>
             </div>
-            {/* <div className="flex flex-wrap gap-3 mt-10">
-              {[
-                "ISO 27001",
-                "NIST CSF",
-                "SAMA",
-                "NCA ECC",
-                "GDPR",
-                "SOC 2",
-                "PCI DSS",
-                "CMMC",
-              ].map((b) => (
-                <span
-                  key={b}
-                  className="bg-[#ffffff0c] text-gray-300 text-xs px-3 py-1.5 rounded-lg border border-[#ffffff12] font-medium"
-                >
-                  {b}
-                </span>
-              ))}
-            </div> */}
           </div>
 
-          {/* Hero visual */}
           <div className="hidden lg:flex items-center justify-center">
             <div className="relative w-96 h-96">
-              {/* Animated rings */}
               <div
                 className="absolute inset-0 rounded-full border border-[#16a34a20] animate-ping"
                 style={{ animationDuration: "3s" }}
@@ -226,38 +224,44 @@ export default function Home({ navigate }) {
                   </div>
                 </div>
               </div>
-              {/* Floating badges */}
               {[
                 {
                   label: "Data Protection",
                   pos: "bottom-20 -right-2",
-                  icon: "🛡️",
+                  icon: Shield,
                 },
                 {
                   label: "Information Security",
                   pos: "top-10 -left-4",
-                  icon: "🔒",
+                  icon: Lock,
                 },
-                { label: "Data Privacy", pos: "bottom-32 left-0", icon: "🔐" },
+                {
+                  label: "Data Privacy",
+                  pos: "bottom-32 left-0",
+                  icon: LockKeyhole,
+                },
                 {
                   label: "AI Security",
                   pos: "top-24 -right-4",
-                  icon: "🤖🔒",
+                  icon: Brain,
                 },
                 {
                   label: "AI Governance",
                   pos: "bottom-5 left-20",
-                  icon: "⚖️",
+                  icon: Scale,
                 },
-              ].map((b) => (
-                <div
-                  key={b.label}
-                  className={`absolute ${b.pos} bg-[#0f172a] border border-[#16a34a40] text-white px-3 py-1.5 rounded-xl shadow-xl text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap`}
-                >
-                  <span>{b.icon}</span>
-                  {b.label}
-                </div>
-              ))}
+              ].map((b) => {
+                const IconComponent = b.icon;
+                return (
+                  <div
+                    key={b.label}
+                    className={`absolute ${b.pos} bg-[#0f172a] border border-[#16a34a40] text-white px-3 py-1.5 rounded-xl shadow-xl text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap`}
+                  >
+                    <IconComponent className="w-4 h-4 text-[#16a34a]" />
+                    {b.label}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -273,21 +277,24 @@ export default function Home({ navigate }) {
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-px bg-white/20 border border-white/20 rounded-2xl overflow-hidden">
-            {industries.map((ind, index) => (
-              <div
-                key={ind.name}
-                onClick={() => navigate(ind.page)}
-                className="flex items-center gap-3 bg-[#0F172A] p-4 text-white hover:bg-white/10 transition-colors"
-              >
-                <span className="text-3xl">{ind.icon}</span>
-                <div>
-                  <span className="font-semibold text-sm">{ind.name}</span>
-                  <span className="block text-xs text-white/60 mt-1">
-                    Cyber Protected
-                  </span>
+            {industriesData.map((ind) => {
+              const IconComponent = ind.icon;
+              return (
+                <div
+                  key={ind.name}
+                  onClick={() => navigate(ind.page)}
+                  className="flex items-center gap-3 bg-[#0F172A] p-4 text-white hover:bg-white/10 transition-colors cursor-pointer"
+                >
+                  <IconComponent className="w-8 h-8 text-[#16a34a]" />
+                  <div>
+                    <span className="font-semibold text-sm">{ind.name}</span>
+                    <span className="block text-xs text-white/60 mt-1">
+                      Cyber Protected
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -297,29 +304,32 @@ export default function Home({ navigate }) {
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeader title="Our Services" subtitle="What We Deliver" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {services.map((s, i) => (
-              <div
-                key={i}
-                onClick={() => navigate("what-we-do")}
-                className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100 hover:border-[#16a34a40] group hover:-translate-y-1"
-              >
-                <div className="w-14 h-14 bg-[#f0fdf4] rounded-xl flex items-center justify-center mb-4 text-2xl group-hover:bg-[#16a34a] transition-colors">
-                  {s.icon}
+            {servicesData.map((service, i) => {
+              const IconComponent = service.icon;
+              return (
+                <div
+                  key={i}
+                  onClick={() => navigate("what-we-do")}
+                  className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100 hover:border-[#16a34a40] group hover:-translate-y-1"
+                >
+                  <div className="w-14 h-14 bg-[#f0fdf4] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#16a34a] transition-colors">
+                    <IconComponent className="w-7 h-7 text-[#16a34a] group-hover:text-white transition-colors" />
+                  </div>
+                  <h3 className="font-black text-[#0f172a] text-lg mb-0.5">
+                    {service.title}
+                  </h3>
+                  <p className="text-[#16a34a] text-xs font-semibold mb-2">
+                    {service.sub}
+                  </p>
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    {service.desc}
+                  </p>
+                  <div className="mt-4 text-[#16a34a] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Find out more <ArrowRight className="w-4 h-4" />
+                  </div>
                 </div>
-                <h3 className="font-black text-[#0f172a] text-lg mb-0.5">
-                  {s.title}
-                </h3>
-                <p className="text-[#16a34a] text-xs font-semibold mb-2">
-                  {s.sub}
-                </p>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  {s.desc}
-                </p>
-                <div className="mt-4 text-[#16a34a] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Find out more →
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className="text-center mt-10">
             <Button
@@ -353,8 +363,8 @@ export default function Home({ navigate }) {
             </p>
             <div className="space-y-5">
               <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 bg-[#16a34a20] rounded-xl flex items-center justify-center text-xl shrink-0">
-                  ⭐
+                <div className="w-10 h-10 bg-[#16a34a20] rounded-xl flex items-center justify-center shrink-0">
+                  <Award className="w-5 h-5 text-[#16a34a]" />
                 </div>
                 <div>
                   <h4 className="font-bold text-white mb-1">
@@ -368,8 +378,8 @@ export default function Home({ navigate }) {
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 bg-[#16a34a20] rounded-xl flex items-center justify-center text-xl shrink-0">
-                  💡
+                <div className="w-10 h-10 bg-[#16a34a20] rounded-xl flex items-center justify-center shrink-0">
+                  <Lightbulb className="w-5 h-5 text-[#16a34a]" />
                 </div>
                 <div>
                   <h4 className="font-bold text-white mb-1">
@@ -421,23 +431,13 @@ export default function Home({ navigate }) {
                   "ISO-Aligned Governance Frameworks",
                   "Regulatory Compliance Expertise",
                   "Risk, Continuity & Audit Readiness",
-                  "Active",
+                  "Active Threat Monitoring",
                 ].map((item) => (
                   <div
                     key={item}
                     className="flex items-center gap-2 text-sm text-gray-300"
                   >
-                    <svg
-                      className="w-4 h-4 text-[#16a34a] shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <CheckCircle className="w-4 h-4 text-[#16a34a] shrink-0" />
                     {item}
                   </div>
                 ))}
@@ -468,41 +468,44 @@ export default function Home({ navigate }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: "📐",
+                icon: Gavel,
                 title: "Governance",
                 desc: "Compliance built on ISO 27001, NIST CSF, SOC 2, and regional standards for robust, auditable governance.",
               },
               {
-                icon: "⚖️",
+                icon: Scale,
                 title: "Regulatory Compliance",
                 desc: "Deep expertise across SAMA, NCA, GDPR, HIPAA, CCPA, UAE PDPL, Qatar PDPPL, FedRAMP, and CMMC.",
               },
               {
-                icon: "🔄",
+                icon: RefreshCw,
                 title: "Risk & Audit Readiness",
                 desc: "Continuous risk register management, audit preparation, evidence collection, and control lifecycle governance.",
               },
               {
-                icon: "🛟",
+                icon: Headphones,
                 title: "Support & Remote Assistance",
                 desc: "Dedicated technical support and remote assistance for immediate issue resolution, system guidance, and proactive monitoring for subscribed clients.",
               },
-            ].map((c, i) => (
-              <div
-                key={i}
-                className="border border-gray-100 rounded-2xl p-7 shadow-md hover:shadow-xl transition-all hover:border-[#16a34a40] hover:-translate-y-1 duration-300"
-              >
-                <div className="w-14 h-14 bg-[#f0fdf4] rounded-xl flex items-center justify-center text-2xl mb-4">
-                  {c.icon}
+            ].map((c, i) => {
+              const IconComponent = c.icon;
+              return (
+                <div
+                  key={i}
+                  className="border border-gray-100 rounded-2xl p-7 shadow-md hover:shadow-xl transition-all hover:border-[#16a34a40] hover:-translate-y-1 duration-300"
+                >
+                  <div className="w-14 h-14 bg-[#f0fdf4] rounded-xl flex items-center justify-center mb-4">
+                    <IconComponent className="w-7 h-7 text-[#16a34a]" />
+                  </div>
+                  <h3 className="font-bold text-[#0f172a] text-lg mb-2">
+                    {c.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    {c.desc}
+                  </p>
                 </div>
-                <h3 className="font-bold text-[#0f172a] text-lg mb-2">
-                  {c.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  {c.desc}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -554,12 +557,15 @@ export default function Home({ navigate }) {
             <p className="text-gray-400 mb-2">
               For a free initial 30-minute consultancy, please contact us.
             </p>
-            <a
-              href="mailto:info@rislix.com"
-              className="text-[#16a34a] font-semibold text-sm mb-6 block hover:underline"
-            >
-              info@rislix.com
-            </a>
+            <div className="flex items-center gap-2 mb-6">
+              <Mail className="w-4 h-4 text-[#16a34a]" />
+              <a
+                href="mailto:info@rislix.com"
+                className="text-[#16a34a] font-semibold text-sm hover:underline"
+              >
+                info@rislix.com
+              </a>
+            </div>
             <ContactForm dark />
           </div>
         </div>
@@ -618,33 +624,12 @@ export default function Home({ navigate }) {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
-      {/* <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <SectionHeader title="What Our Clients Say" subtitle="Testimonials" />
-          <div className="grid md:grid-cols-2 gap-6">
-            <TestimonialCard
-              quote="RISLIX transformed our compliance posture from reactive to proactive. Their vCISO service gave us the board-level reporting and ISO 27001 roadmap we desperately needed. Exceptional expertise."
-              name="CEO"
-              role="CEO"
-              company="Gulf FinTech Group"
-            />
-            <TestimonialCard
-              quote="The GRC framework RISLIX implemented helped us pass our SAMA audit with zero major findings. Their team understands both the regulatory language and the practical implementation challenges."
-              name="CEO"
-              role="Head of Compliance"
-              company="Meridian Capital"
-            />
-          </div>
-        </div>
-      </section> */}
-
       {/* ── FAQ ── */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <SectionHeader title="Frequently Asked Questions" subtitle="FAQ" />
           <div className="space-y-3">
-            {faqs.map((faq, i) => (
+            {faqsData.map((faq, i) => (
               <div
                 key={i}
                 className="border border-gray-200 rounded-2xl overflow-hidden"
@@ -654,21 +639,11 @@ export default function Home({ navigate }) {
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
                   <span className="font-semibold text-[#0f172a]">{faq.q}</span>
-                  <svg
+                  <ChevronDown
                     className={`w-5 h-5 text-[#16a34a] transition-transform shrink-0 ml-4 ${
                       openFaq === i ? "rotate-180" : ""
                     }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
+                  />
                 </button>
                 {openFaq === i && (
                   <div className="px-6 pb-5 text-gray-600 leading-relaxed">
@@ -702,31 +677,34 @@ export default function Home({ navigate }) {
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeader title="Latest Insights" subtitle="Knowledge Centre" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {news.map((n, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
-                onClick={() => navigate("knowledge-centre")}
-              >
-                <div className="h-40 bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] flex items-center justify-center">
-                  <span className="text-5xl">{n.icon}</span>
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs bg-[#f0fdf4] text-[#16a34a] font-semibold px-2 py-1 rounded-full border border-[#16a34a30]">
-                      {n.tag}
-                    </span>
-                    <span className="text-xs text-gray-400">{n.date}</span>
+            {newsData.map((news, i) => {
+              const IconComponent = news.icon;
+              return (
+                <div
+                  key={i}
+                  className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
+                  onClick={() => navigate("knowledge-centre")}
+                >
+                  <div className="h-40 bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] flex items-center justify-center">
+                    <IconComponent className="w-16 h-16 text-[#16a34a]" />
                   </div>
-                  <h3 className="font-bold text-[#0f172a] text-sm group-hover:text-[#16a34a] transition-colors line-clamp-2">
-                    {n.title}
-                  </h3>
-                  <p className="text-[#16a34a] text-xs font-semibold mt-3">
-                    Read more →
-                  </p>
+                  <div className="p-5">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs bg-[#f0fdf4] text-[#16a34a] font-semibold px-2 py-1 rounded-full border border-[#16a34a30]">
+                        {news.tag}
+                      </span>
+                      <span className="text-xs text-gray-400">{news.date}</span>
+                    </div>
+                    <h3 className="font-bold text-[#0f172a] text-sm group-hover:text-[#16a34a] transition-colors line-clamp-2">
+                      {news.title}
+                    </h3>
+                    <p className="text-[#16a34a] text-xs font-semibold mt-3 flex items-center gap-1">
+                      Read more <ArrowRight className="w-3 h-3" />
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -740,12 +718,15 @@ export default function Home({ navigate }) {
           <p className="text-white/80 mb-3 text-lg">
             For a free initial 30-minute consultancy please contact
           </p>
-          <a
-            href="mailto:info@rislix.com"
-            className="text-white font-black text-2xl hover:underline block mb-8"
-          >
-            info@rislix.com
-          </a>
+          <div className="flex items-center justify-center gap-2 mb-8">
+            <Mail className="w-6 h-6" />
+            <a
+              href="mailto:info@rislix.com"
+              className="text-white font-black text-2xl hover:underline"
+            >
+              info@rislix.com
+            </a>
+          </div>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button
               variant="dark"
@@ -758,7 +739,7 @@ export default function Home({ navigate }) {
             <Button
               size="lg"
               onClick={() => navigate("pricing")}
-              className="bg-white text-[#16a34a] hover:bg-gray-100 rounded-full px-8 py-4 font-bold"
+              className="bg-white !text-[#16a34a] hover:bg-gray-100 rounded-full px-8 py-4 font-bold"
             >
               View Pricing
             </Button>
