@@ -71,7 +71,7 @@ export default function Navbar({ currentPage, navigate }) {
 
   /* Dropdown panel shared style */
   const dropdownClass =
-    "absolute top-[calc(100%+8px)] left-0 bg-[#0f1f3d] border border-white/10 shadow-2xl shadow-black/40 rounded-xl py-2 z-50 backdrop-blur-md";
+    "absolute top-[calc(100%+8px)] left-0 bg-[#0f1f3d] border border-white/10 shadow-2xl shadow-black/40 rounded-xl py-2 z-50 backdrop-blur-md min-w-[280px]";
 
   // Handlers for Services dropdown
   const handleServicesMouseEnter = () => {
@@ -100,7 +100,19 @@ export default function Navbar({ currentPage, navigate }) {
   const handleWhoMouseLeave = () => {
     whoTimer.current = setTimeout(() => {
       setWhoOpen(false);
-    }, 150); // 150ms delay
+    }, 150);
+  };
+
+  // Handle main button click for What We Do
+  const handleWhatWeDoClick = () => {
+    navigate("what-we-do");
+    setServicesOpen(false);
+  };
+
+  // Handle main button click for Who We Help
+  const handleWhoWeHelpClick = () => {
+    navigate("who-we-help");
+    setWhoOpen(false);
   };
 
   return (
@@ -147,12 +159,15 @@ export default function Navbar({ currentPage, navigate }) {
             onMouseEnter={handleServicesMouseEnter}
             onMouseLeave={handleServicesMouseLeave}
           >
-            <button className={navLinkClass("what-we-do")}>
+            <button
+              onClick={handleWhatWeDoClick}
+              className={navLinkClass("what-we-do")}
+            >
               What We Do <ChevronDown />
             </button>
             {servicesOpen && (
               <div
-                className={`${dropdownClass} w-80`}
+                className={dropdownClass}
                 onMouseEnter={handleServicesMouseEnter}
                 onMouseLeave={handleServicesMouseLeave}
               >
@@ -175,6 +190,18 @@ export default function Navbar({ currentPage, navigate }) {
                     {s.label}
                   </button>
                 ))}
+                {/* Add "View All Services" link */}
+                <div className="mt-2 pt-2 border-t border-white/10 px-4 py-2">
+                  <button
+                    onClick={() => {
+                      navigate("what-we-do");
+                      setServicesOpen(false);
+                    }}
+                    className="text-xs text-green-400 hover:text-green-300 font-semibold flex items-center gap-1 w-full"
+                  >
+                    View all services →
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -185,12 +212,15 @@ export default function Navbar({ currentPage, navigate }) {
             onMouseEnter={handleWhoMouseEnter}
             onMouseLeave={handleWhoMouseLeave}
           >
-            <button className={navLinkClass("who-we-help")}>
+            <button
+              onClick={handleWhoWeHelpClick}
+              className={navLinkClass("who-we-help")}
+            >
               Who We Help <ChevronDown />
             </button>
             {whoOpen && (
               <div
-                className={`${dropdownClass} w-56`}
+                className={dropdownClass}
                 onMouseEnter={handleWhoMouseEnter}
                 onMouseLeave={handleWhoMouseLeave}
               >
@@ -212,6 +242,18 @@ export default function Navbar({ currentPage, navigate }) {
                     {s.label}
                   </button>
                 ))}
+                {/* Add "View All Industries" link */}
+                <div className="mt-2 pt-2 border-t border-white/10 px-4 py-2">
+                  <button
+                    onClick={() => {
+                      navigate("who-we-help");
+                      setWhoOpen(false);
+                    }}
+                    className="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1 w-full"
+                  >
+                    View all industries →
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -325,6 +367,15 @@ export default function Navbar({ currentPage, navigate }) {
                     {s.label}
                   </button>
                 ))}
+                <button
+                  onClick={() => {
+                    navigate("what-we-do");
+                    setMobileOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-sm text-green-400 font-semibold hover:text-green-300 transition-colors rounded-lg hover:bg-white/5 mt-1"
+                >
+                  View all services →
+                </button>
               </div>
             )}
           </div>
@@ -367,6 +418,15 @@ export default function Navbar({ currentPage, navigate }) {
                     {s.label}
                   </button>
                 ))}
+                <button
+                  onClick={() => {
+                    navigate("who-we-help");
+                    setMobileOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-sm text-blue-400 font-semibold hover:text-blue-300 transition-colors rounded-lg hover:bg-white/5 mt-1"
+                >
+                  View all industries →
+                </button>
               </div>
             )}
           </div>
