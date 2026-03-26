@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .line-clamp-2 {
@@ -24,4 +24,33 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Custom cursor styles */
+.custom-cursor,
+.custom-cursor-ring {
+  will-change: transform, left, top;
+}
+
+/* Ensure cursor is visible on dark backgrounds */
+.custom-cursor {
+  box-shadow: 0 0 8px rgba(22, 163, 74, 0.5);
+}
+
+/* Add hover effects for interactive elements */
+button:hover ~ .custom-cursor-ring,
+a:hover ~ .custom-cursor-ring {
+  transform: scale(1.2);
+}
+
+/* Disable custom cursor on mobile devices */
+@media (max-width: 768px) {
+  .custom-cursor,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+
+  * {
+    cursor: auto !important;
+  }
 }

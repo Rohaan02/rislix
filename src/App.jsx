@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import TopBar from "./components/TopBar";
+import CustomCursor from "./components/CustomCursor";
 import Home from "./pages/Home";
 import WhatWeDo from "./pages/WhatWeDo";
 import WhoWeHelp from "./pages/WhoWeHelp";
@@ -19,12 +20,10 @@ import KnowledgeCentre from "./pages/KnowledgeCentre";
 import Contact from "./pages/Contact";
 import CookieBanner from "./components/CookieBanner";
 
-// Component to handle navigation and page titles
 function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Update page title based on current route
   useEffect(() => {
     const pageNames = {
       "/": "Home",
@@ -40,7 +39,6 @@ function AppContent() {
     const pageName = pageNames[location.pathname] || "Home";
     document.title = `${pageName} | RISLIX - Cybersecurity & Compliance`;
 
-    // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       const descriptions = {
@@ -67,7 +65,6 @@ function AppContent() {
 
   const navigateTo = (page) => {
     const [basePage, hash] = page.split("#");
-    // Map 'home' to root path '/'
     const path = basePage === "home" ? "/" : `/${basePage}`;
 
     if (hash) {
@@ -91,6 +88,7 @@ function AppContent() {
 
   return (
     <div className="font-sans text-gray-800 bg-white">
+      <CustomCursor />
       <TopBar navigate={navigateTo} />
       <Navbar currentPage={location.pathname} navigate={navigateTo} />
       <main>
