@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import ContactForm from "../components/ContactForm";
 import SectionHeader from "../components/SectionHeader";
 import {
@@ -31,6 +32,13 @@ import {
 export default function Contact({ navigate }) {
   return (
     <div>
+      <Helmet>
+        <title>Contact Us | RISLIX</title>
+        <meta
+          name="description"
+          content="Get in touch with RISLIX for enterprise-grade cybersecurity, compliance, and governance solutions."
+        />
+      </Helmet>
       <section className="bg-[#0f172a] text-white py-24">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-[#16a34a] font-semibold uppercase tracking-widest text-sm mb-3">

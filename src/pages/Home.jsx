@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Button from "../components/Button";
 import SectionHeader from "../components/SectionHeader";
@@ -156,6 +157,13 @@ export default function Home({ navigate }) {
 
   return (
     <div>
+      <Helmet>
+        <title>Home | RISLIX</title>
+        <meta
+          name="description"
+          content="Enterprise-grade cybersecurity, compliance, and governance solutions for regulated organisations worldwide."
+        />
+      </Helmet>
       {/* ── Hero ── */}
       <section className="relative bg-[#0f172a] text-white overflow-hidden min-h-[88vh] flex items-center">
         <HeroBg />

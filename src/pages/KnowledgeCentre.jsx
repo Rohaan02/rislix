@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Button from "../components/Button";
 import SectionHeader from "../components/SectionHeader";
@@ -130,6 +131,13 @@ export default function KnowledgeCentre({ navigate }) {
 
   return (
     <div>
+      <Helmet>
+        <title>Knowledge Centre | RISLIX</title>
+        <meta
+          name="description"
+          content="Explore the RISLIX Knowledge Centre for expert insights, guides, and news on cybersecurity compliance, risk management, and best practices to protect your business."
+        />
+      </Helmet>
       <section className="bg-[#0f172a] text-white py-24">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-[#16a34a] font-semibold uppercase tracking-widest text-sm mb-3">

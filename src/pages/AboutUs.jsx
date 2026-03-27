@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Button from "../components/Button";
 import SectionHeader from "../components/SectionHeader";
 import RislixLogo from "../components/RislixLogo";
@@ -113,6 +114,13 @@ const certifications = [
 export default function AboutUs({ navigate }) {
   return (
     <div>
+      <Helmet>
+        <title>About Us | RISLIX</title>
+        <meta
+          name="description"
+          content="Learn about RISLIX, a leading cybersecurity consultancy. Our mission, values, and expert team dedicated to protecting your business from cyber threats."
+        />
+      </Helmet>
       <section className="bg-[#0f172a] text-white py-24">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-[#16a34a] font-semibold uppercase tracking-widest text-sm mb-3">

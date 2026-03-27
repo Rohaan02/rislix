@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Button from "../components/Button";
 import SectionHeader from "../components/SectionHeader";
 import {
@@ -119,6 +120,13 @@ export default function CaseStudies({ navigate }) {
 
   return (
     <div>
+      <Helmet>
+        <title>Case Studies | RISLIX</title>
+        <meta
+          name="description"
+          content="Explore real-world case studies showcasing how RISLIX has helped organizations across various industries achieve cybersecurity compliance, mitigate risks, and enhance their security posture."
+        />
+      </Helmet>
       <section className="bg-[#0f172a] text-white py-24">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-[#16a34a] font-semibold uppercase tracking-widest text-sm mb-3">
