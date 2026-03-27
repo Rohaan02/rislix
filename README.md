@@ -1,31 +1,47 @@
-# Rislix - React Website Replica
+# RISLIX – Cybersecurity, GRC & AI Governance
 
 ## 📁 Project Structure
 
 ```
-src/
-├── components/         # Reusable components
-│   ├── TopBar.jsx      # Top contact bar
-│   ├── Navbar.jsx      # Navigation with dropdowns
-│   ├── Footer.jsx      # Footer with links & contact
-│   ├── Button.jsx      # Reusable button (variants: primary, outline, dark, white)
-│   ├── SectionHeader.jsx  # Section title/subtitle
-│   ├── ServiceCard.jsx    # Service tile card
-│   ├── StatCard.jsx       # Animated stat counter
-│   ├── ProcessStep.jsx    # Step in a process timeline
-│   ├── TestimonialCard.jsx # Customer review card
-│   ├── ContactForm.jsx    # Contact form with validation
-│   └── CookieBanner.jsx   # GDPR cookie consent
+rohaan02-rislix/
+├── README.md                  # Project documentation
+├── index.html                # Root HTML file
+├── package.json              # Dependencies & scripts
+├── vite.config.js            # Vite configuration
+├── tailwind.config.js        # Tailwind CSS config
+├── postcss.config.js         # PostCSS config
+├── .cpanel.yml               # Deployment config (cPanel)
 │
-└── pages/              # Full page components
-    ├── Home.jsx         # Homepage (all sections)
-    ├── WhatWeDo.jsx     # Services page (11 services)
-    ├── WhoWeHelp.jsx    # Client profiles (SME, Entrepreneur, Director)
-    ├── Pricing.jsx      # Pricing plans (6 tiers)
-    ├── CaseStudies.jsx  # 4 detailed case studies
-    ├── AboutUs.jsx      # Team, values, certifications
-    ├── KnowledgeCentre.jsx # Filterable blog/articles
-    └── Contact.jsx      # Contact form + info
+└── src/
+    ├── App.jsx               # Main app component (routes/layout)
+    ├── index.jsx             # Entry point
+    ├── index.css             # Global styles (Tailwind imports)
+    │
+    ├── components/           # Reusable UI components
+    │   ├── TopBar.jsx            # Top contact/info bar
+    │   ├── Navbar.jsx            # Navigation with dropdowns
+    │   ├── Footer.jsx            # Footer section
+    │   ├── Button.jsx            # Reusable button (variants)
+    │   ├── SectionHeader.jsx     # Section title/subtitle
+    │   ├── ServiceCard.jsx       # Service display card
+    │   ├── StatCard.jsx          # Animated stats counter
+    │   ├── ProcessStep.jsx       # Process timeline step
+    │   ├── TestimonialCard.jsx   # Customer testimonial card
+    │   ├── ContactForm.jsx       # Form with validation
+    │   ├── CookieBanner.jsx      # Cookie consent banner
+    │   ├── CustomCursor.jsx      # Custom cursor effect
+    │   ├── HeroBg.jsx            # Hero section background visuals
+    │   └── RislixLogo.jsx        # Logo component
+    │
+    └── pages/                # Page-level components (routes)
+        ├── Home.jsx              # Homepage (all sections)
+        ├── WhatWeDo.jsx         # Services (11 offerings)
+        ├── WhoWeHelp.jsx        # Target clients (SME, Entrepreneurs, Directors)
+        ├── Pricing.jsx          # Pricing plans (6 tiers)
+        ├── CaseStudies.jsx      # Case studies showcase
+        ├── AboutUs.jsx          # Company info, team, values
+        ├── KnowledgeCentre.jsx  # Blog/articles (filterable)
+        └── Contact.jsx          # Contact page
 ```
 
 ## 🚀 Getting Started
@@ -87,8 +103,16 @@ https://rislix.com/deploy.php?key=rohaan123
 7. Your website will now be live with the latest changes.
    ✅ This workflow avoids building on the server and ensures your latest production-ready frontend is deployed safely.
 
-# For Lucide React (recommended)
+## 📦 Additional Packages
+
+### For Lucide React (recommended)
 
 ```bash
 npm install lucide-react
+```
+
+### SEO Support
+
+```bash
+npm i react-helmet-async
 ```
