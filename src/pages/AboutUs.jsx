@@ -1,7 +1,7 @@
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Button from "../components/Button";
 import SectionHeader from "../components/SectionHeader";
-import RislixLogo from "../components/RislixLogo";
 import {
   Search,
   Trophy,
@@ -11,27 +11,55 @@ import {
   Scale,
   Lock,
   Handshake,
-  User,
-  Award,
-  Star,
-  Shield,
-  Target,
-  TrendingUp,
-  Sparkles,
-  Rocket,
-  Crown,
-  CheckCircle,
-  Briefcase,
-  Building2,
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Heart,
-  ThumbsUp,
-  Quote,
-  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+
+import ECCouncilRislixCertified from "../../public/Certified/EC Council Certified - Rislix.png";
+import IAPPRislixCertified from "../../public/Certified/IAPP Certified - Rislix.png";
+import ISACARislixCertified from "../../public/Certified/ISACA Certified - Rislix.png";
+import ISC2RislixCertified from "../../public/Certified/ISC2 Certified - Rislix.png";
+import PECBRislixCertified from "../../public/Certified/PECB Certified - Rislix.jpeg";
+import CSARislixCertified from "../../public/Certified/CSA Certified - Rislix.png";
+
+const certificationsData = [
+  {
+    id: 1,
+    name: "EC Council",
+    image: ECCouncilRislixCertified,
+    alt: "EC Council Certified Partner",
+  },
+  {
+    id: 2,
+    name: "IAPP",
+    image: IAPPRislixCertified,
+    alt: "IAPP Certified Partner",
+  },
+  {
+    id: 3,
+    name: "ISACA",
+    image: ISACARislixCertified,
+    alt: "ISACA Certified Partner",
+  },
+  {
+    id: 4,
+    name: "ISC2",
+    image: ISC2RislixCertified,
+    alt: "ISC2 Certified Partner",
+  },
+  {
+    id: 5,
+    name: "PECB",
+    image: PECBRislixCertified,
+    alt: "PECB Certified Partner",
+  },
+  {
+    id: 6,
+    name: "CSA",
+    image: CSARislixCertified,
+    alt: "CSA Certified Partner",
+  },
+];
 
 const valuesData = [
   {
@@ -56,33 +84,6 @@ const valuesData = [
   },
 ];
 
-const teamData = [
-  {
-    name: "Vincent Picton",
-    role: "Founder & CEO",
-    icon: User,
-    bio: "20+ years in cybersecurity, governance, and compliance across regulated industries globally.",
-  },
-  {
-    name: "James Harrison",
-    role: "Head of VAPT",
-    icon: Shield,
-    bio: "CREST certified penetration tester with expertise in web, API, and cloud security.",
-  },
-  {
-    name: "Priya Sharma",
-    role: "GRC & Privacy Lead",
-    icon: Scale,
-    bio: "Qualified DPO and IASME certified assessor specialising in ISO 27001 and GDPR.",
-  },
-  {
-    name: "Tom Bradley",
-    role: "vCISO Practice Lead",
-    icon: Target,
-    bio: "Former CISO with 15+ years advising boards and regulators across finance and government.",
-  },
-];
-
 const statsData = [
   { number: "30+", label: "Cybersecurity Projects" },
   { number: "100%", label: "Service Guarantee" },
@@ -96,20 +97,163 @@ const globalFeatures = [
   { icon: Handshake, title: "Trusted Advisors" },
 ];
 
-const certifications = [
-  "ISO 27001:2022",
-  "ISO 42001",
-  "NIST CSF",
-  "SAMA Framework",
-  "NCA ECC",
-  "GDPR",
-  "SOC 2",
-  "PCI DSS",
-  "CMMC",
-  "FedRAMP",
-  "HIPAA",
-  "Cyber Essentials",
-];
+// Slider Component with Infinite Loop
+const CertificationSlider = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const itemsPerView = 5;
+
+  // Create extended array for infinite loop (duplicate items at start and end)
+  const extendedData = [
+    ...certificationsData.slice(-itemsPerView), // Last items at beginning
+    ...certificationsData,
+    ...certificationsData.slice(0, itemsPerView), // First items at end
+  ];
+
+  const totalItems = extendedData.length;
+  const virtualIndex = currentIndex + itemsPerView; // Offset for the actual start
+
+  const nextSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prevIndex) => prevIndex + 1);
+  };
+
+  const prevSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prevIndex) => prevIndex - 1);
+  };
+
+  // Handle infinite loop transition
+  useEffect(() => {
+    if (!isTransitioning) return;
+
+    const timer = setTimeout(() => {
+      if (currentIndex >= certificationsData.length) {
+        // Jump back to start without animation
+        setIsTransitioning(false);
+        setCurrentIndex(0);
+      } else if (currentIndex < 0) {
+        // Jump to end without animation
+        setIsTransitioning(false);
+        setCurrentIndex(certificationsData.length - 1);
+      } else {
+        setIsTransitioning(false);
+      }
+    }, 500); // Match transition duration
+
+    return () => clearTimeout(timer);
+  }, [currentIndex, isTransitioning]);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, nextSlide]);
+
+  // Calculate translateX with proper offset
+  const translateX = -(virtualIndex * (100 / itemsPerView));
+
+  // Get current visible items for dots
+  const getCurrentGroup = () => {
+    let rawIndex = currentIndex % certificationsData.length;
+    if (rawIndex < 0) rawIndex += certificationsData.length;
+    return Math.floor(rawIndex / itemsPerView);
+  };
+
+  const totalGroups = Math.ceil(certificationsData.length / itemsPerView);
+
+  return (
+    <div className="relative">
+      {/* Slider Container */}
+      <div className="overflow-hidden">
+        <div
+          className={`flex gap-6 transition-transform duration-500 ease-in-out ${
+            isTransitioning ? "transition-transform" : ""
+          }`}
+          style={{
+            transform: `translateX(${translateX}%)`,
+          }}
+        >
+          {extendedData.map((cert, idx) => (
+            <div
+              key={`${cert.id}-${idx}`}
+              className="flex-shrink-0 group"
+              style={{ width: `calc(${100 / itemsPerView}% - 1.5rem)` }}
+            >
+              <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-[#16a34a40]">
+                <div className="w-full h-32 flex items-center justify-center mb-4">
+                  {cert.image ? (
+                    <img
+                      src={cert.image}
+                      alt={cert.alt}
+                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+                      <span className="text-gray-400 text-sm">Coming Soon</span>
+                    </div>
+                  )}
+                </div>
+                <p className="text-center text-sm font-semibold text-gray-600 group-hover:text-[#16a34a] transition-colors">
+                  {cert.name} Certified Partner
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-all duration-300 group focus:outline-none z-10"
+        aria-label="Previous slide"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
+        <ChevronLeft className="w-6 h-6 text-[#16a34a] group-hover:scale-110 transition-transform" />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-all duration-300 group focus:outline-none z-10"
+        aria-label="Next slide"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
+        <ChevronRight className="w-6 h-6 text-[#16a34a] group-hover:scale-110 transition-transform" />
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="flex justify-center gap-2 mt-8">
+        {Array.from({ length: totalGroups }).map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              setCurrentIndex(idx * itemsPerView);
+              setIsAutoPlaying(false);
+              setTimeout(() => setIsAutoPlaying(true), 5000);
+            }}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              getCurrentGroup() === idx
+                ? "w-8 bg-[#16a34a]"
+                : "w-2 bg-gray-300 hover:bg-gray-400"
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function AboutUs({ navigate }) {
   return (
@@ -254,56 +398,32 @@ export default function AboutUs({ navigate }) {
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <SectionHeader title="Meet the Team" subtitle="Our Experts" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teamData.map((member, index) => {
-              const IconComponent = member.icon;
-              return (
-                <div
-                  key={index}
-                  className="text-center p-6 bg-gray-50 rounded-2xl hover:shadow-lg transition-shadow border border-gray-100 group"
-                >
-                  <div className="w-20 h-20 bg-gradient-to-br from-[#0f172a] to-[#1e3a5f] rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <IconComponent className="w-10 h-10 text-[#16a34a]" />
-                  </div>
-                  <h3 className="font-bold text-[#0f172a]">{member.name}</h3>
-                  <p className="text-[#16a34a] text-sm font-semibold mb-2">
-                    {member.role}
-                  </p>
-                  <p className="text-gray-500 text-xs leading-relaxed">
-                    {member.bio}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+          <SectionHeader
+            title="Certifications & Partnerships"
+            subtitle="Our Credentials"
+          />
+          <p className="text-center text-gray-500 max-w-2xl mx-auto mb-12">
+            We are proud to be certified and recognized by the world's leading
+            cybersecurity organizations.
+          </p>
+          <CertificationSlider />
         </div>
       </section>
 
       <section className="py-16 bg-[#0f172a] text-white">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-black mb-4">
-            Certifications & Standards Expertise
+            Ready to Work With Industry Experts?
           </h2>
           <p className="text-gray-400 mb-8">
-            Our team holds and works with the highest accreditations and
-            standards in the industry.
+            Join the organizations that trust RISLIX for their cybersecurity and
+            compliance needs.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {certifications.map((cert) => (
-              <span
-                key={cert}
-                className="bg-[#ffffff10] border border-[#ffffff15] text-gray-300 px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#16a34a20] hover:border-[#16a34a] transition-all"
-              >
-                {cert}
-              </span>
-            ))}
-          </div>
           <Button
             onClick={() => navigate("contact")}
             className="bg-[#16a34a] hover:bg-[#15803d] text-white rounded-full px-8 py-3 font-bold transition-colors"
           >
-            Work With Us
+            Get Started Today
           </Button>
         </div>
       </section>
