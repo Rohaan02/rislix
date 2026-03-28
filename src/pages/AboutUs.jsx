@@ -21,6 +21,7 @@ import ISACARislixCertified from "../../public/Certified/ISACA Certified - Risli
 import ISC2RislixCertified from "../../public/Certified/ISC2 Certified - Rislix.png";
 import PECBRislixCertified from "../../public/Certified/PECB Certified - Rislix.jpeg";
 import CSARislixCertified from "../../public/Certified/CSA Certified - Rislix.png";
+import CQIIRCARislixCertified from "../../public/Certified/CQI IRCA Certified - Rislix.png";
 
 const certificationsData = [
   {
@@ -58,6 +59,12 @@ const certificationsData = [
     name: "CSA",
     image: CSARislixCertified,
     alt: "CSA Certified Partner",
+  },
+  {
+    id: 7,
+    name: "CQI IRCA",
+    image: CQIIRCARislixCertified,
+    alt: "CQI & IRCA Certified Partner",
   },
 ];
 
