@@ -33,6 +33,7 @@ import {
   ArrowRight,
   LockKeyhole,
 } from "lucide-react";
+import TestimonialCard from "../components/TestimonialCard";
 
 const servicesData = [
   {
@@ -183,9 +184,7 @@ export default function Home({ navigate }) {
           <div>
             <h1 className="text-4xl lg:text-[3.2rem] font-black leading-tight mb-6 tracking-tight">
               Compliance That Inspires
-              <br />
-              <span className="text-[#16a34a]">Confidence,</span> Security That
-              <br />
+              <span className="text-[#16a34a]"> Confidence,</span> Security That
               Enables <span className="text-[#16a34a]">Growth.</span>
             </h1>
             <p className="text-gray-300 text-lg mb-10 leading-relaxed max-w-xl">
@@ -628,6 +627,42 @@ export default function Home({ navigate }) {
                 label="of cybersecurity incidents can be prevented with the right governance controls"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <SectionHeader title="What Our Clients Say" subtitle="Testimonials" />
+          <div className="grid md:grid-cols-2 gap-6">
+            <TestimonialCard
+              quote="The team demonstrated deep expertise in SAMA, NCA, and PDPL compliance. Their structured approach and attention to detail helped us significantly strengthen our cybersecurity and governance posture."
+              // name="Client"
+              role="CISO"
+              company="Leading Insurance Provider (KSA)"
+            />
+
+            <TestimonialCard
+              quote="Their support in implementing AI governance and ISO standards brought clarity and structure to our processes. We were able to achieve compliance readiness much faster than expected."
+              // name="Client"
+              role="CEO"
+              company="Blockchain & Web3 Software House"
+            />
+
+            <TestimonialCard
+              quote="A highly professional engagement. Their work on data privacy and regulatory alignment helped us meet national compliance requirements while improving internal data protection practices."
+              // name="Client"
+              role="Head of Compliance"
+              company="Public Sector Organization"
+            />
+
+            <TestimonialCard
+              quote="Their expertise in ISO frameworks and audit readiness was instrumental. The team ensured we were fully prepared with proper documentation, controls, and evidence for successful assessments."
+              // name="Client"
+              role="IT Director"
+              company="Enterprise Technology Company"
+            />
           </div>
         </div>
       </section>

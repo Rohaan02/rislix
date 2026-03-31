@@ -120,7 +120,7 @@ export default function Navbar({ currentPage, navigate }) {
       className="sticky top-0 z-50 shadow-xl"
       style={{
         background:
-          "linear-gradient(110deg, #fff 0%, #166534 70%, #16a34a 100%)",
+          "linear-gradient(110deg, #fff 0%, #166534 80%, #16a34a 100%)",
         borderBottom: "1px solid rgba(255,255,255,0.12)",
       }}
     >

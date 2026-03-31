@@ -115,3 +115,11 @@ npm install lucide-react
 ```bash
 npm i react-helmet-async
 ```
+
+### For more Styling
+
+```bash
+npm i @emotion/react
+npm i @emotion/styled
+npm i @mui/icons-material
+```
