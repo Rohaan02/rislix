@@ -20,7 +20,7 @@ export default function RislixLogo({
         }}
       />
 
-      {/* Wordmark: RISL in navy, IX in green */}
+      {/* Wordmark: RIS in navy, LIX in green */}
       {showText && (
         <div className="flex flex-col leading-none text-left">
           {/* Added text-left here */}
@@ -33,8 +33,8 @@ export default function RislixLogo({
                   : "text-xl"
             }`}
           >
-            <span className="text-[#1e3a8a]">RISL</span>
-            <span className="text-[#16a34a]">IX</span>
+            <span className="text-[#1e3a8a]">RIS</span>
+            <span className="text-[#16a34a]">LIX</span>
           </div>
           <span className="text-black font-medium text-[9px] tracking-[0.2em] uppercase mt-0.5">
             {/* Information Security Consultancy */}

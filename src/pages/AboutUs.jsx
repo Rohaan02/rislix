@@ -345,8 +345,8 @@ export default function AboutUs({ navigate }) {
               </div>
             </div>
             <h3 className="text-2xl font-black text-white mb-1">
-              <span className="text-[#1e3a8a]">RISL</span>
-              <span className="text-[#16a34a]">IX</span>
+              <span className="text-[#1e3a8a]">RIS</span>
+              <span className="text-[#16a34a]">LIX</span>
             </h3>
             <p className="text-[#16a34a] font-semibold mb-4 text-sm">
               Cyber · Privacy · GRC · AI

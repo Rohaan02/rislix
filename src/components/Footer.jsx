@@ -24,12 +24,12 @@ export default function Footer({
                   textSize === "lg"
                     ? "text-2xl"
                     : textSize === "sm"
-                    ? "text-base"
-                    : "text-xl"
+                      ? "text-base"
+                      : "text-xl"
                 }`}
               >
-                <span className="text-[#1e3a8a]">RISL</span>
-                <span className="text-[#16a34a]">IX</span>
+                <span className="text-[#1e3a8a]">RIS</span>
+                <span className="text-[#16a34a]">LIX</span>
               </div>
             </button>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
