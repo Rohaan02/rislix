@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import TopBar from "./components/TopBar";
-import CustomCursor from "./components/CustomCursor";
 import Home from "./pages/Home";
 import WhatWeDo from "./pages/WhatWeDo";
 import WhoWeHelp from "./pages/WhoWeHelp";
@@ -88,7 +87,6 @@ function AppContent() {
 
   return (
     <div className="font-sans text-gray-800 bg-white">
-      <CustomCursor />
       <TopBar navigate={navigateTo} />
       <Navbar currentPage={location.pathname} navigate={navigateTo} />
       <main>

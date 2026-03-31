@@ -29,7 +29,6 @@ rohaan02-rislix/
     │   ├── TestimonialCard.jsx   # Customer testimonial card
     │   ├── ContactForm.jsx       # Form with validation
     │   ├── CookieBanner.jsx      # Cookie consent banner
-    │   ├── CustomCursor.jsx      # Custom cursor effect
     │   ├── HeroBg.jsx            # Hero section background visuals
     │   └── RislixLogo.jsx        # Logo component
     │
