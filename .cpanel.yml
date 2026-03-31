@@ -1,6 +1,0 @@
-deployment:
-  tasks:
-    - npm ci
-    - npm run build
-    - /bin/rm -rf /home/rislixco/public_html/*
-    - /bin/cp -R dist/* /home/rislixco/public_html
