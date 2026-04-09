@@ -37,7 +37,7 @@ export const sendEmails = async (data) => {
   // Admin Notification
   await sendMail({
     // to: process.env.EMAIL_USER,
-    to: email,
+    to: process.env.EMAIL_USER,
     subject: "New Lead from Rislix Contact Form",
     html: adminTemplate(data),
   });
