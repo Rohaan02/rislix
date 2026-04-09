@@ -9,12 +9,13 @@ import { fileURLToPath } from "url";
 import emailRoutes from "./routes/emailRoutes.js";
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Fix __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CORS configuration
+// ✅ CORS
 app.use(
   cors({
     origin: [
@@ -28,32 +29,38 @@ app.use(
   }),
 );
 
-// Parse JSON & URL-encoded data
+// ✅ Body parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve API routes
+// ✅ API routes FIRST
 app.use("/api", emailRoutes);
 
-// Serve frontend build (React)
-app.use(express.static(path.join(__dirname, "../public")));
-
-// Serve index.html for all other routes (React Router support)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+// Optional API check
+app.get("/api", (req, res) => {
+  res.json({ message: "🚀 API is running..." });
 });
 
-// Root API check
-app.get("/", (req, res) => {
-  res.send("🚀 Rislix Backend API is running...");
+// ✅ Serve frontend (build/public)
+const publicPath = path.join(__dirname, "../public");
+app.use(express.static(publicPath));
+
+// ✅ SPA fallback (IMPORTANT FIX for Express v5)
+app.use((req, res, next) => {
+  // Skip API routes
+  if (req.path.startsWith("/api")) {
+    return next();
+  }
+
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
-// 404 Handler
+// ✅ 404 (only for API or unknown routes)
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
 
-// Error handler
+// ✅ Error handler
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err.stack);
 
@@ -63,8 +70,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`📁 Serving frontend from: ${publicPath}`);
+  console.log(`📧 API: http://localhost:${PORT}/api`);
 });
