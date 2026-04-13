@@ -104,22 +104,40 @@ const globalFeatures = [
   { icon: Handshake, title: "Trusted Advisors" },
 ];
 
-// Slider Component with Infinite Loop
+// Responsive Slider Component with Infinite Loop
 const CertificationSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const itemsPerView = 5;
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024,
+  );
 
-  // Create extended array for infinite loop (duplicate items at start and end)
+  // Determine items per view based on screen size
+  const getItemsPerView = () => {
+    if (windowWidth < 768) return 1; // Mobile: 1 item
+    if (windowWidth < 1024) return 2; // Tablet: 2 items
+    return 5; // Desktop: 5 items
+  };
+
+  const itemsPerView = getItemsPerView();
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Create extended array for infinite loop
   const extendedData = [
-    ...certificationsData.slice(-itemsPerView), // Last items at beginning
+    ...certificationsData.slice(-itemsPerView),
     ...certificationsData,
-    ...certificationsData.slice(0, itemsPerView), // First items at end
+    ...certificationsData.slice(0, itemsPerView),
   ];
-
-  const totalItems = extendedData.length;
-  const virtualIndex = currentIndex + itemsPerView; // Offset for the actual start
 
   const nextSlide = () => {
     if (isTransitioning) return;
@@ -139,33 +157,32 @@ const CertificationSlider = () => {
 
     const timer = setTimeout(() => {
       if (currentIndex >= certificationsData.length) {
-        // Jump back to start without animation
         setIsTransitioning(false);
         setCurrentIndex(0);
       } else if (currentIndex < 0) {
-        // Jump to end without animation
         setIsTransitioning(false);
         setCurrentIndex(certificationsData.length - 1);
       } else {
         setIsTransitioning(false);
       }
-    }, 500); // Match transition duration
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [currentIndex, isTransitioning]);
 
   // Auto-play functionality
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || isTransitioning) return;
 
     const interval = setInterval(() => {
-      nextSlide();
+      setCurrentIndex((prevIndex) => prevIndex + 1);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, nextSlide]);
+  }, [isAutoPlaying, isTransitioning]);
 
-  // Calculate translateX with proper offset
+  // Calculate translateX
+  const virtualIndex = currentIndex + itemsPerView;
   const translateX = -(virtualIndex * (100 / itemsPerView));
 
   // Get current visible items for dots
@@ -178,66 +195,93 @@ const CertificationSlider = () => {
   const totalGroups = Math.ceil(certificationsData.length / itemsPerView);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {/* Slider Container */}
-      <div className="overflow-hidden">
+      <div className="overflow-hidden w-full">
         <div
-          className={`flex gap-6 transition-transform duration-500 ease-in-out ${
-            isTransitioning ? "transition-transform" : ""
-          }`}
+          className="flex transition-transform duration-500 ease-in-out"
           style={{
             transform: `translateX(${translateX}%)`,
+            gap:
+              itemsPerView === 1 ? "0px" : itemsPerView === 2 ? "16px" : "24px",
           }}
         >
-          {extendedData.map((cert, idx) => (
-            <div
-              key={`${cert.id}-${idx}`}
-              className="flex-shrink-0 group"
-              style={{ width: `calc(${100 / itemsPerView}% - 1.5rem)` }}
-            >
-              <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-[#16a34a40]">
-                <div className="w-full h-32 flex items-center justify-center mb-4">
-                  {cert.image ? (
-                    <img
-                      src={cert.image}
-                      alt={cert.alt}
-                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
-                      <span className="text-gray-400 text-sm">Coming Soon</span>
-                    </div>
-                  )}
+          {extendedData.map((cert, idx) => {
+            const itemWidth = 100 / itemsPerView;
+            return (
+              <div
+                key={`${cert.id}-${idx}`}
+                className="flex-shrink-0 group"
+                style={{
+                  width: `${itemWidth}%`,
+                  minWidth: `${itemWidth}%`,
+                }}
+              >
+                <div className="bg-white rounded-2xl p-4 md:p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 hover:border-[#16a34a40] h-full">
+                  <div className="w-full h-24 md:h-32 flex items-center justify-center mb-4">
+                    {cert.image ? (
+                      <img
+                        src={cert.image}
+                        alt={cert.alt}
+                        className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span className="text-gray-400 text-sm">
+                          Coming Soon
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-center text-xs md:text-sm font-semibold text-gray-600 group-hover:text-[#16a34a] transition-colors line-clamp-2">
+                    {cert.name} Certified Partner
+                  </p>
                 </div>
-                <p className="text-center text-sm font-semibold text-gray-600 group-hover:text-[#16a34a] transition-colors">
-                  {cert.name} Certified Partner
-                </p>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* Navigation Buttons */}
+      {/* Navigation Buttons - Hidden on Mobile, Visible on Tablet+ */}
       <button
         onClick={prevSlide}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-all duration-300 group focus:outline-none z-10"
+        className="hidden md:flex absolute -left-8 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-all duration-300 z-10"
         aria-label="Previous slide"
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
-        <ChevronLeft className="w-6 h-6 text-[#16a34a] group-hover:scale-110 transition-transform" />
+        <ChevronLeft className="w-6 h-6 text-[#16a34a]" />
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-all duration-300 group focus:outline-none z-10"
+        className="hidden md:flex absolute -right-8 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-all duration-300 z-10"
         aria-label="Next slide"
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
-        <ChevronRight className="w-6 h-6 text-[#16a34a] group-hover:scale-110 transition-transform" />
+        <ChevronRight className="w-6 h-6 text-[#16a34a]" />
       </button>
+
+      {/* Mobile Touch Navigation Buttons */}
+      <div className="flex md:hidden justify-between items-center gap-3 mt-6">
+        <button
+          onClick={prevSlide}
+          className="bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-all duration-300 flex-shrink-0"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-5 h-5 text-[#16a34a]" />
+        </button>
+        <div className="flex-1"></div>
+        <button
+          onClick={nextSlide}
+          className="bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-all duration-300 flex-shrink-0"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-5 h-5 text-[#16a34a]" />
+        </button>
+      </div>
 
       {/* Dots Indicator */}
       <div className="flex justify-center gap-2 mt-8">
@@ -413,7 +457,9 @@ export default function AboutUs({ navigate }) {
             We are proud to be certified and recognized by the world's leading
             cybersecurity organizations.
           </p>
-          <CertificationSlider />
+          <div className="px-0 md:px-12 lg:px-16">
+            <CertificationSlider />
+          </div>
         </div>
       </section>
 
