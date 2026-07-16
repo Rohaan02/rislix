@@ -93,13 +93,7 @@ If you are using the pre-built dist folder for production:
 3. Remove the previous dist folder from the server.
 4. Go to cPanel → Git Version Control → Pull or Deploy.
 5. Click “Update from Remote” to pull the latest changes.
-6. Visit the deploy script in your browser:
-
-```bash
-https://rislix.com/deploy.php?key=rohaan123
-```
-
-7. Your website will now be live with the latest changes.
+6. After running the deployment script, Your website will now be live with the latest changes.
    ✅ This workflow avoids building on the server and ensures your latest production-ready frontend is deployed safely.
 
 ## 📦 Additional Packages
