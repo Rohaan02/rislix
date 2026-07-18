@@ -23,6 +23,8 @@ const OpportunitiesController = () => import('#controllers/opportunities_control
 const Iso27001ClausesController = () => import('#controllers/iso27001_clauses_controller');
 const Iso27001ControlsController = () => import('#controllers/iso27001_controls_controller');
 const InventoryController = () => import('#controllers/inventory_controller');
+const ContactController = () => import('#controllers/contact_controller');
+router.post('/api/send-email', [ContactController, 'send']);
 router.get('/api/health', async () => {
     return { status: 'ok', app: 'Rislix GRC Tool', version: '0.1.0' };
 });

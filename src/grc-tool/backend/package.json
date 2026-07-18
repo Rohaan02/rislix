@@ -31,6 +31,7 @@
     "#start/*": "./start/*.js"
   },
   "dependencies": {
+    "@azure/msal-node": "^2.16.2",
     "@adonisjs/auth": "^9.2.3",
     "@adonisjs/core": "^6.21.0",
     "@adonisjs/cors": "^2.2.1",
