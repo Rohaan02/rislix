@@ -148,6 +148,7 @@ const servicesData = [
           "Cyber Essentials (UK)",
           "FedRAMP (US Public Sector Cloud)",
           "CMMC (US DoD)",
+          "PCI DSS",
         ],
       },
       {
