@@ -10,6 +10,10 @@ import AuditFinding from '#models/audit_finding';
 import TenantControl from '#models/tenant_control';
 import Assessment from '#models/assessment';
 import Framework from '#models/framework';
+import Iso27001Clause from '#models/iso27001_clause';
+import Iso27001ClauseEvidence from '#models/iso27001_clause_evidence';
+import Control from '#models/control';
+import FrameworkControlEvidence from '#models/framework_control_evidence';
 import { calculateComplianceScore } from '#services/compliance_score';
 async function xlsxResponse(response, filename, headers, rows) {
     const wb = new ExcelJS.Workbook();
@@ -44,7 +48,7 @@ export default class ReportsController {
         const statuses = tenantControls.map((tc) => tc.status);
         const complianceScore = calculateComplianceScore(statuses);
         const frameworks = await Framework.query().whereIn('name', [
-            'ISO 27001', 'SOC 2', 'ISO 42001',
+            'ISO 27001', 'SOC 2', 'ISO 42001', 'PCI DSS',
         ]);
         async function frameworkCompletion(frameworkName) {
             const fw = frameworks.find((f) => f.name === frameworkName);
@@ -56,17 +60,62 @@ export default class ReportsController {
                 .select('status');
             return calculateComplianceScore(controls.map((c) => c.status));
         }
-        const [iso27001, soc2, iso42001] = await Promise.all([
-            frameworkCompletion('ISO 27001'),
+        async function iso27001Completion() {
+            const [totalRow] = await Iso27001Clause.query().count('* as total');
+            const [readyRow] = await Iso27001ClauseEvidence.query()
+                .where('tenant_id', tid)
+                .where('status', 'ready')
+                .countDistinct('clause_id as total');
+            const total = Number(totalRow.$extras.total);
+            const ready = Number(readyRow.$extras.total);
+            return total > 0 ? Math.round((ready / total) * 100 * 100) / 100 : 0;
+        }
+        async function pciDssCompletion() {
+            const pciDss = frameworks.find((f) => f.name === 'PCI DSS');
+            if (!pciDss)
+                return 0;
+            const [totalRow] = await Control.query()
+                .where('framework_id', pciDss.id)
+                .whereRaw("control_code LIKE 'REQ-%.%'")
+                .whereRaw("control_code NOT LIKE 'REQ-%.%.%'")
+                .count('* as total');
+            const [readyRow] = await FrameworkControlEvidence.query()
+                .where('tenant_id', tid)
+                .where('status', 'ready')
+                .whereHas('control', (q) => q.where('framework_id', pciDss.id))
+                .countDistinct('control_id as total');
+            const total = Number(totalRow.$extras.total);
+            const ready = Number(readyRow.$extras.total);
+            return total > 0 ? Math.round((ready / total) * 100 * 100) / 100 : 0;
+        }
+        const [iso27001, soc2, iso42001, pciDss] = await Promise.all([
+            iso27001Completion(),
             frameworkCompletion('SOC 2'),
             frameworkCompletion('ISO 42001'),
+            pciDssCompletion(),
         ]);
-        const [openRisks, highRisks, overdueTasks, pendingEvidence, approvedEvidence, openFindings, expiredPolicies, notImplemented] = await Promise.all([
-            Risk.query().where('tenant_id', tid).whereNot('status', 'closed').count('* as total'),
+        const today = DateTime.now().toISODate();
+        const pciDssFramework = frameworks.find((f) => f.name === 'PCI DSS');
+        const pciEvidenceBase = () => pciDssFramework
+            ? FrameworkControlEvidence.query()
+                .where('tenant_id', tid)
+                .whereHas('control', (q) => q.where('framework_id', pciDssFramework.id))
+            : null;
+        const zeroRow = [{ $extras: { total: 0 } }];
+        const [openRisks, closedRisks, overdueRisks, highRisks, overdueTasks, pendingEvidence, approvedEvidence, totalEvidence, openFindings, expiredPolicies, notImplemented] = await Promise.all([
+            Risk.query().where('tenant_id', tid).whereNotIn('status', ['closed', 'accepted']).count('* as total'),
+            Risk.query().where('tenant_id', tid).whereIn('status', ['accepted', 'closed']).count('* as total'),
+            Risk.query()
+                .where('tenant_id', tid)
+                .whereNotNull('target_date')
+                .where('target_date', '<', today)
+                .whereNotIn('status', ['closed', 'accepted'])
+                .count('* as total'),
             Risk.query().where('tenant_id', tid).whereIn('risk_tier', ['high', 'critical']).count('* as total'),
             Task.query().where('tenant_id', tid).where('status', 'overdue').count('* as total'),
-            Evidence.query().where('tenant_id', tid).where('status', 'pending').count('* as total'),
-            Evidence.query().where('tenant_id', tid).where('status', 'approved').count('* as total'),
+            pciEvidenceBase()?.whereNot('status', 'ready').count('* as total') ?? Promise.resolve(zeroRow),
+            pciEvidenceBase()?.where('status', 'ready').count('* as total') ?? Promise.resolve(zeroRow),
+            pciEvidenceBase()?.count('* as total') ?? Promise.resolve(zeroRow),
             AuditFinding.query()
                 .whereHas('audit', (q) => q.where('tenant_id', tid))
                 .whereNot('status', 'closed')
@@ -86,12 +135,19 @@ export default class ReportsController {
         const auditReadiness = applicable > 0 ? Math.round((implemented / applicable) * 100) : 0;
         return response.ok({
             complianceScore,
-            frameworkCompletion: { iso27001, soc2, iso42001 },
+            frameworkCompletion: { iso27001, soc2, iso42001, pciDss },
             openRisks: Number(openRisks[0].$extras.total),
+            closedRisks: Number(closedRisks[0].$extras.total),
+            overdueRisks: Number(overdueRisks[0].$extras.total),
             highRisks: Number(highRisks[0].$extras.total),
             overdueTasks: Number(overdueTasks[0].$extras.total),
             pendingEvidence: Number(pendingEvidence[0].$extras.total),
             approvedEvidence: Number(approvedEvidence[0].$extras.total),
+            approvedEvidencePct: (() => {
+                const total = Number(totalEvidence[0].$extras.total);
+                const approved = Number(approvedEvidence[0].$extras.total);
+                return total > 0 ? Math.round((approved / total) * 100) : 0;
+            })(),
             openAuditFindings: Number(openFindings[0].$extras.total),
             expiredPolicies: Number(expiredPolicies[0].$extras.total),
             controlsNotImplemented: Number(notImplemented[0].$extras.total),

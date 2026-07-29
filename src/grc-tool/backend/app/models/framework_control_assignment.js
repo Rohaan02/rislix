@@ -9,65 +9,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { DateTime } from 'luxon';
 import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm';
-import User from '#models/user';
+import Control from '#models/control';
 import Tenant from '#models/tenant';
-export default class ActivityLog extends BaseModel {
-    static table = 'activity_logs';
+import User from '#models/user';
+export default class FrameworkControlAssignment extends BaseModel {
+    static table = 'framework_control_assignments';
 }
 __decorate([
     column({ isPrimary: true }),
     __metadata("design:type", Number)
-], ActivityLog.prototype, "id", void 0);
+], FrameworkControlAssignment.prototype, "id", void 0);
 __decorate([
     column(),
-    __metadata("design:type", Object)
-], ActivityLog.prototype, "tenantId", void 0);
+    __metadata("design:type", Number)
+], FrameworkControlAssignment.prototype, "controlId", void 0);
 __decorate([
     column(),
-    __metadata("design:type", Object)
-], ActivityLog.prototype, "userId", void 0);
-__decorate([
-    column(),
-    __metadata("design:type", String)
-], ActivityLog.prototype, "action", void 0);
+    __metadata("design:type", Number)
+], FrameworkControlAssignment.prototype, "tenantId", void 0);
 __decorate([
     column(),
     __metadata("design:type", String)
-], ActivityLog.prototype, "entityType", void 0);
+], FrameworkControlAssignment.prototype, "department", void 0);
 __decorate([
     column(),
     __metadata("design:type", Object)
-], ActivityLog.prototype, "entityId", void 0);
-__decorate([
-    column({
-        prepare: (value) => (value ? JSON.stringify(value) : null),
-        consume: (value) => {
-            if (!value)
-                return null;
-            try {
-                return JSON.parse(value);
-            }
-            catch {
-                return null;
-            }
-        },
-    }),
-    __metadata("design:type", Object)
-], ActivityLog.prototype, "metadata", void 0);
-__decorate([
-    column(),
-    __metadata("design:type", Object)
-], ActivityLog.prototype, "ipAddress", void 0);
+], FrameworkControlAssignment.prototype, "assignedBy", void 0);
 __decorate([
     column.dateTime({ autoCreate: true }),
     __metadata("design:type", DateTime)
-], ActivityLog.prototype, "createdAt", void 0);
+], FrameworkControlAssignment.prototype, "createdAt", void 0);
 __decorate([
-    belongsTo(() => User),
+    column.dateTime({ autoCreate: true, autoUpdate: true }),
     __metadata("design:type", Object)
-], ActivityLog.prototype, "user", void 0);
+], FrameworkControlAssignment.prototype, "updatedAt", void 0);
+__decorate([
+    belongsTo(() => Control, { foreignKey: 'controlId' }),
+    __metadata("design:type", Object)
+], FrameworkControlAssignment.prototype, "control", void 0);
 __decorate([
     belongsTo(() => Tenant),
     __metadata("design:type", Object)
-], ActivityLog.prototype, "tenant", void 0);
-//# sourceMappingURL=activity_log.js.map
+], FrameworkControlAssignment.prototype, "tenant", void 0);
+__decorate([
+    belongsTo(() => User, { foreignKey: 'assignedBy' }),
+    __metadata("design:type", Object)
+], FrameworkControlAssignment.prototype, "assignedByUser", void 0);
+//# sourceMappingURL=framework_control_assignment.js.map

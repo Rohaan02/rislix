@@ -6,6 +6,7 @@ import Role from '#models/role';
 import PasswordResetToken from '#models/password_reset_token';
 import { registerValidator, loginValidator } from '#validators/auth_validator';
 import { logActivity } from '#services/activity_logger';
+import { sendOtpEmail } from '#services/email_service';
 export default class AuthController {
     async register(ctx) {
         const { request, response } = ctx;
@@ -116,31 +117,62 @@ export default class AuthController {
     }
     async forgotPassword({ request, response }) {
         const { email } = request.only(['email']);
-        const user = await User.findBy('email', email);
+        const user = await User.findBy('email', email?.toString().trim().toLowerCase());
         if (!user) {
-            return response.ok({ message: 'If that email exists, a reset link has been sent.' });
+            return response.badRequest({ message: 'No account found with this email address.' });
         }
-        const token = crypto.randomBytes(32).toString('hex');
+        await PasswordResetToken.query().where('user_id', user.id).delete();
+        const otp = String(crypto.randomInt(100000, 999999));
         await PasswordResetToken.create({
             userId: user.id,
-            token,
-            expiresAt: DateTime.now().plus({ hours: 1 }),
+            otp,
+            expiresAt: DateTime.now().plus({ minutes: 5 }),
         });
-        return response.ok({
-            message: 'If that email exists, a reset link has been sent.',
-            token,
+        await sendOtpEmail({
+            to: user.email,
+            name: user.fullName || user.email,
+            otp,
         });
+        return response.ok({ message: 'If that email is registered, a code has been sent.' });
+    }
+    async verifyOtp({ request, response }) {
+        const { email, otp } = request.only(['email', 'otp']);
+        const user = await User.findBy('email', email?.toString().trim().toLowerCase());
+        if (!user)
+            return response.badRequest({ message: 'Invalid code.' });
+        const record = await PasswordResetToken.query()
+            .where('user_id', user.id)
+            .where('otp', String(otp).trim())
+            .first();
+        if (!record)
+            return response.badRequest({ message: 'Invalid code.' });
+        if (record.isExpired) {
+            await record.delete();
+            return response.badRequest({ message: 'Code has expired. Please request a new one.' });
+        }
+        return response.ok({ valid: true });
     }
     async resetPassword({ request, response }) {
-        const { token, password } = request.only(['token', 'password']);
-        const resetToken = await PasswordResetToken.findBy('token', token);
-        if (!resetToken || resetToken.isExpired) {
-            return response.badRequest({ message: 'Invalid or expired reset token.' });
+        const { email, otp, password } = request.only(['email', 'otp', 'password']);
+        if (!email || !otp || !password) {
+            return response.badRequest({ message: 'Email, code, and new password are required.' });
         }
-        const user = await User.findOrFail(resetToken.userId);
+        const user = await User.findBy('email', email?.toString().trim().toLowerCase());
+        if (!user)
+            return response.badRequest({ message: 'Invalid code.' });
+        const record = await PasswordResetToken.query()
+            .where('user_id', user.id)
+            .where('otp', String(otp).trim())
+            .first();
+        if (!record)
+            return response.badRequest({ message: 'Invalid code.' });
+        if (record.isExpired) {
+            await record.delete();
+            return response.badRequest({ message: 'Code has expired. Please request a new one.' });
+        }
         user.password = password;
         await user.save();
-        await resetToken.delete();
+        await record.delete();
         return response.ok({ message: 'Password reset successfully.' });
     }
     async refreshToken({ auth, response }) {

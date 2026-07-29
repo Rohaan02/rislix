@@ -27,7 +27,7 @@ __decorate([
 __decorate([
     column(),
     __metadata("design:type", String)
-], PasswordResetToken.prototype, "token", void 0);
+], PasswordResetToken.prototype, "otp", void 0);
 __decorate([
     column.dateTime(),
     __metadata("design:type", DateTime)

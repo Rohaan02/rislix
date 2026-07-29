@@ -22,6 +22,7 @@ const ReportsController = () => import('#controllers/reports_controller');
 const OpportunitiesController = () => import('#controllers/opportunities_controller');
 const Iso27001ClausesController = () => import('#controllers/iso27001_clauses_controller');
 const Iso27001ControlsController = () => import('#controllers/iso27001_controls_controller');
+const FrameworkControlsController = () => import('#controllers/framework_controls_controller');
 const InventoryController = () => import('#controllers/inventory_controller');
 const ContactController = () => import('#controllers/contact_controller');
 router.post('/api/send-email', [ContactController, 'send']);
@@ -33,6 +34,7 @@ router.group(() => {
         router.post('/register', [AuthController, 'register']).use(middleware.rateLimit());
         router.post('/login', [AuthController, 'login']).use(middleware.rateLimit());
         router.post('/forgot-password', [AuthController, 'forgotPassword']).use(middleware.rateLimit());
+        router.post('/verify-otp', [AuthController, 'verifyOtp']).use(middleware.rateLimit());
         router.post('/reset-password', [AuthController, 'resetPassword']).use(middleware.rateLimit());
         router.post('/accept-invite', [ProfileController, 'acceptInvite']);
     }).prefix('/auth');
@@ -274,6 +276,20 @@ router.group(() => {
                 .use(middleware.permission({ permissions: ['risks:delete'] }));
         }).prefix('/opportunities');
         router.group(() => {
+            router.get('/:id', [FrameworkControlsController, 'show'])
+                .use(middleware.permission({ permissions: ['controls:view'] }));
+            router.post('/:id/evidence', [FrameworkControlsController, 'uploadEvidence'])
+                .use(middleware.permission({ permissions: ['controls:create'] }));
+            router.put('/:id/evidence/:evidenceId', [FrameworkControlsController, 'updateEvidence'])
+                .use(middleware.permission({ permissions: ['controls:edit'] }));
+            router.delete('/:id/evidence/:evidenceId', [FrameworkControlsController, 'deleteEvidence'])
+                .use(middleware.permission({ permissions: ['controls:delete'] }));
+            router.post('/:id/assign', [FrameworkControlsController, 'assign'])
+                .use(middleware.permission({ permissions: ['controls:edit'] }));
+            router.delete('/:id/assign', [FrameworkControlsController, 'unassign'])
+                .use(middleware.permission({ permissions: ['controls:edit'] }));
+        }).prefix('/framework-controls');
+        router.group(() => {
             router.get('/', [Iso27001ClausesController, 'index'])
                 .use(middleware.permission({ permissions: ['risks:view'] }));
             router.get('/evidence', [Iso27001ClausesController, 'allEvidence'])
@@ -309,6 +325,10 @@ router.group(() => {
             router.get('/', [InventoryController, 'index'])
                 .use(middleware.permission({ permissions: ['risks:view'] }));
             router.post('/', [InventoryController, 'store'])
+                .use(middleware.permission({ permissions: ['risks:create'] }));
+            router.get('/template', [InventoryController, 'downloadTemplate'])
+                .use(middleware.permission({ permissions: ['risks:view'] }));
+            router.post('/bulk-upload', [InventoryController, 'bulkUpload'])
                 .use(middleware.permission({ permissions: ['risks:create'] }));
             router.put('/:id', [InventoryController, 'update'])
                 .use(middleware.permission({ permissions: ['risks:edit'] }));

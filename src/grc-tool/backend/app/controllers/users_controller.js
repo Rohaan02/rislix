@@ -7,6 +7,7 @@ import PasswordResetToken from '#models/password_reset_token';
 import { updateUserValidator, inviteUserValidator } from '#validators/user_validator';
 import { resolveTenantId } from '#helpers/tenant_scope';
 import { logActivity } from '#services/activity_logger';
+import { sendOtpEmail } from '#services/email_service';
 export default class UsersController {
     async index(ctx) {
         const { request, response, auth } = ctx;
@@ -158,19 +159,18 @@ export default class UsersController {
     async forcePasswordReset(ctx) {
         const { params, response } = ctx;
         const user = await User.findOrFail(params.id);
-        const token = crypto.randomBytes(32).toString('hex');
+        const otp = String(crypto.randomInt(100000, 999999));
+        await PasswordResetToken.query().where('user_id', user.id).delete();
         await PasswordResetToken.create({
             userId: user.id,
-            token,
+            otp,
             expiresAt: DateTime.now().plus({ hours: 24 }),
         });
         user.status = 'active';
         await user.save();
+        await sendOtpEmail({ to: user.email, name: user.fullName ?? user.email, otp });
         await logActivity({ ctx, action: 'updated', entityType: 'User', entityId: user.id, metadata: { forcePasswordReset: true } });
-        return response.ok({
-            message: 'Password reset token generated.',
-            token,
-        });
+        return response.ok({ message: 'Password reset OTP sent to user email.' });
     }
 }
 //# sourceMappingURL=users_controller.js.map

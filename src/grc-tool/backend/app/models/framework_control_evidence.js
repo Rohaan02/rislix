@@ -9,65 +9,66 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { DateTime } from 'luxon';
 import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm';
-import User from '#models/user';
+import Control from '#models/control';
 import Tenant from '#models/tenant';
-export default class ActivityLog extends BaseModel {
-    static table = 'activity_logs';
+import User from '#models/user';
+export default class FrameworkControlEvidence extends BaseModel {
+    static table = 'framework_control_evidences';
 }
 __decorate([
     column({ isPrimary: true }),
     __metadata("design:type", Number)
-], ActivityLog.prototype, "id", void 0);
+], FrameworkControlEvidence.prototype, "id", void 0);
 __decorate([
     column(),
-    __metadata("design:type", Object)
-], ActivityLog.prototype, "tenantId", void 0);
+    __metadata("design:type", Number)
+], FrameworkControlEvidence.prototype, "controlId", void 0);
 __decorate([
     column(),
-    __metadata("design:type", Object)
-], ActivityLog.prototype, "userId", void 0);
-__decorate([
-    column(),
-    __metadata("design:type", String)
-], ActivityLog.prototype, "action", void 0);
+    __metadata("design:type", Number)
+], FrameworkControlEvidence.prototype, "tenantId", void 0);
 __decorate([
     column(),
     __metadata("design:type", String)
-], ActivityLog.prototype, "entityType", void 0);
+], FrameworkControlEvidence.prototype, "fileName", void 0);
+__decorate([
+    column(),
+    __metadata("design:type", String)
+], FrameworkControlEvidence.prototype, "filePath", void 0);
 __decorate([
     column(),
     __metadata("design:type", Object)
-], ActivityLog.prototype, "entityId", void 0);
+], FrameworkControlEvidence.prototype, "fileType", void 0);
 __decorate([
-    column({
-        prepare: (value) => (value ? JSON.stringify(value) : null),
-        consume: (value) => {
-            if (!value)
-                return null;
-            try {
-                return JSON.parse(value);
-            }
-            catch {
-                return null;
-            }
-        },
-    }),
-    __metadata("design:type", Object)
-], ActivityLog.prototype, "metadata", void 0);
+    column(),
+    __metadata("design:type", String)
+], FrameworkControlEvidence.prototype, "status", void 0);
 __decorate([
     column(),
     __metadata("design:type", Object)
-], ActivityLog.prototype, "ipAddress", void 0);
+], FrameworkControlEvidence.prototype, "notes", void 0);
+__decorate([
+    column(),
+    __metadata("design:type", Object)
+], FrameworkControlEvidence.prototype, "uploadedBy", void 0);
 __decorate([
     column.dateTime({ autoCreate: true }),
     __metadata("design:type", DateTime)
-], ActivityLog.prototype, "createdAt", void 0);
+], FrameworkControlEvidence.prototype, "createdAt", void 0);
 __decorate([
-    belongsTo(() => User),
+    column.dateTime({ autoCreate: true, autoUpdate: true }),
     __metadata("design:type", Object)
-], ActivityLog.prototype, "user", void 0);
+], FrameworkControlEvidence.prototype, "updatedAt", void 0);
+__decorate([
+    belongsTo(() => Control, { foreignKey: 'controlId' }),
+    __metadata("design:type", Object)
+], FrameworkControlEvidence.prototype, "control", void 0);
 __decorate([
     belongsTo(() => Tenant),
     __metadata("design:type", Object)
-], ActivityLog.prototype, "tenant", void 0);
-//# sourceMappingURL=activity_log.js.map
+], FrameworkControlEvidence.prototype, "tenant", void 0);
+__decorate([
+    belongsTo(() => User, { foreignKey: 'uploadedBy' }),
+    __metadata("design:type", Object)
+], FrameworkControlEvidence.prototype, "uploader", void 0);
+//# sourceMappingURL=framework_control_evidence.js.map

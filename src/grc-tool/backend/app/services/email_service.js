@@ -1,6 +1,8 @@
 import { ConfidentialClientApplication } from '@azure/msal-node';
 import adminTemplate from './email_templates/admin_template.js';
 import userTemplate from './email_templates/user_template.js';
+import passwordResetTemplate from './email_templates/password_reset_template.js';
+import otpTemplate from './email_templates/otp_template.js';
 async function getAccessToken() {
     const cca = new ConfidentialClientApplication({
         auth: {
@@ -34,6 +36,20 @@ async function sendMail({ to, subject, html }) {
         const err = await res.text();
         throw new Error(`Graph API error: ${err}`);
     }
+}
+export async function sendPasswordResetEmail({ to, name, resetLink, }) {
+    await sendMail({
+        to,
+        subject: 'Reset your Rislix GRC password',
+        html: passwordResetTemplate({ name, resetLink }),
+    });
+}
+export async function sendOtpEmail({ to, name, otp, }) {
+    await sendMail({
+        to,
+        subject: 'Your Rislix GRC password reset code',
+        html: otpTemplate({ name, otp }),
+    });
 }
 export async function sendEmails(data) {
     const { name, email, phone, message } = data;
